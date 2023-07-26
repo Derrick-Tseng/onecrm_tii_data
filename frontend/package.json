@@ -1,5 +1,5 @@
 {
-  "name": "onecrm_tii_data",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
