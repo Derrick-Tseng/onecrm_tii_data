@@ -5,7 +5,7 @@ function SearchBox({placeholder, dataList}){
 		<option key={item} value={item}>{item}</option>
   	);
   	return (
-    	<select>
+    	<select className='header-select'>
       		<option value="" disabled selected>{placeholder}</option>
       		{listItem}
     	</select>
@@ -27,10 +27,10 @@ function Header() {
      		<div class="Rectangle-2763"></div>
       		<div class="Rectangle-2883">
 				<img src="https://onecrm.tw/images/logo-v2-004.png" class="Group-69526"/>
-        		<span>搜尋</span>
+        		<span className="h-span1">搜尋</span>
         		<SearchBox placeholder="壽險公司" dataList={dataList}/>
         		<SearchBox placeholder="停售" dataList={dataList}/>
-				<input placeholder="輸入商品代碼或名稱" name="search-input"></input>
+				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input'></input>
       		</div>
         
     	</div>

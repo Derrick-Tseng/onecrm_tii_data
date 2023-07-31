@@ -1,38 +1,130 @@
-  .Rectangle-825 {
-    width: 5%;
-    height: 20px;
+ /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126 
+   License: none (public domain) 
+*/ 
+html, body, div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+a, abbr, acronym, address, big, cite, code, 
+del, dfn, em, img, ins, kbd, q, s, samp, 
+small, strike, strong, sub, sup, tt, var, 
+b, u, i, center, 
+dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td, 
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, 
+time, mark, audio, video { 
+        margin: 0; 
+        padding: 0; 
+        border: 0; 
+        font-size: 100%; 
+        font: inherit; 
+        vertical-align: baseline;
+} 
+/* HTML5 display-role reset for older browsers */ 
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+        display: block;
+} 
+body {
+        line-height: 1;
+} 
+ol, ul {
+        list-style: none;
+} 
+blockquote, q {
+        quotes: none; 
+} 
+blockquote:before, blockquote:after,
+q:before, q:after {
+        content: ‘’; 
+        content: none; 
+} 
+table { 
+        border-collapse: collapse; 
+        border-spacing: 0; 
+}
+ 
+ .Rectangle-825 {
+    width: 1920px;
+    height: 35px;
+    border-radius: 5px;
+    margin: 20px 0 20px 10%;
+    /* background-color: #6cca98; */
+    display: flex;
+  }
+
+  .btn-filter{
+    width: 70px;
+    height: 35px;
     padding: 8px 20px;
     border-radius: 5px;
-    margin: 1% 0 1% 20%;
+    margin: 0 10px 0 10px;
     background-color: #6cca98;
+    display: flex;
+    border-width: 0px;
+  }
+
+  .Rectangle-2870 {
+    width: 1082px;
+    height: 58px;
+    margin:3px 10% 0 10%;
+    border-radius: 10px;
+    background-color: #efefef;
+    display: flex;
+
   }
 
   .Group-69612 {
-    width: 80%;
+    width: 1082px;
     height: 78px;
     padding: 0 0 0 0.7px;
     border-style:solid;
+    border-radius: 10px;
     border-collapse:collapse;
     border:1px solid grey;  
-    margin:-1px 10% 0 10%;
+    margin:3px 10% 0 10%;
+    display: flex;
   }
+
   
   .Content{
     width: 100%;
     height: 1000px;
-    margin: 17px 0 17px 20px;
+    padding: 10px 10px 10px 10px;
+    /* margin: 17px 0 17px 20px; */
   }
 
-  .cb{
-    position: absolute;
+  .cb1{
+    width: 24px;
+    height: 24px;
+    margin: 17px 31px 27px 20px;
+    object-fit: contain;
+  }
+
+  .btn_filter{
+    width: 60px;
     height: 25px;
-    width: 25px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    border-radius: 5px;
+    background-color: #6cca98;
+    /* border-width: 0px; */
+    /* margin: 1% 0 1% 20%; */
   }
 
-  .span1 {
+  .cb2{
+    width: 30px;
+    height: 30px;
+    margin: 27px 31px 27px 30px;
+    object-fit: contain;
+  }
+
+  .titile_span1{
     width: 100px;
     height: 22px;
-    margin: 28px 20px 28px 31px;
+    margin: 20px 20px 18px 50px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: 500;
@@ -43,12 +135,13 @@
     text-align: left;
     color: #00254a;
     border:1px solid grey;  
+    display: inline;
   }
 
-  .DCB {
+  .titile_DCB {
     width: 68px;
     height: 22px;
-    margin: 28px 16px 28px 20px;
+    margin: 20px 16px 18px 50px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: 500;
@@ -59,12 +152,13 @@
     text-align: left;
     color: #00254a;
     border:1px solid grey;  
+    display: inline;
   }
 
-  .span2 {
-    width: 307px;
+  .title_span2 {
+    width: 80px;
     height: 22px;
-    margin: 28px 214px 28px 16px;
+    margin: 20px 214px 18px 50px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: 500;
@@ -75,12 +169,13 @@
     text-align: left;
     color: #00254a;
     border:1px solid grey;  
+    display: inline;
   }
 
-  .span3 {
+  .titile_span3 {
     width: 90px;
     height: 22px;
-    margin: 28px 132px 28px 214px;
+    margin: 20px 132px 18px 214px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
@@ -91,6 +186,75 @@
     text-align: right;
     color: #00254a;
     border:1px solid grey;  
+    display: inline;
+  }
+
+  .span1 {
+    width: 102px;
+    height: 22px;
+    margin: 30px 20px 28px 35px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #00254a;
+    border:1px solid grey;  
+    display: inline;
+  }
+
+  .DCB {
+    width: 68px;
+    height: 22px;
+    margin: 30px 16px 28px 50px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #00254a;
+    border:1px solid grey;  
+    display: inline;
+  }
+
+  .span2 {
+    width: 80px;
+    height: 22px;
+    margin: 30px 214px 28px 50px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #00254a;
+    border:1px solid grey;  
+    display: inline;
+  }
+
+  .span3 {
+    width: 90px;
+    height: 22px;
+    margin: 28px 117px 28px 100px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #00254a;
+    border:1px solid grey;  
+    display: inline;
   }
 
   .span4 {
@@ -107,4 +271,116 @@
     text-align: left;
     color: #00254a;
     border:1px solid grey;  
+  }
+
+  .Rectangle-3019 {
+    width: 1920px;
+    height: 65px;
+    margin: 1px 0 0;
+    padding: 14px 40px 14px 535px;
+    border-radius: 14px;
+  }
+
+  .Group-69595 {
+    width: 507px;
+    height: 37px;
+    margin: 0 0 0 0;
+    display: flex;
+    flex-direction: row
+  }
+
+  .Group-69454 {
+    width: 300px;
+    height: 37px;
+    margin: 0 0 0 0;
+    display: flex;
+  }
+
+  .Group-69455 {
+    width: 159px;
+    height: 37px;
+    margin: 0 0 0 20px;
+    display: flex;
+  }
+
+  .span5 {
+    width: 101px;
+    height: 37px;
+    margin: 5px 10px 5px 5px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #100f0d;
+  }
+
+  .span6 {
+    width: 72px;
+    height: 37px;
+    margin: 5px 10px 5px 20px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #07304e;
+    display: inline;
+  }
+
+  .btn-left {
+    /* width: 24px; */
+    height: 24px;
+    margin: 5px 5px 5px 0;
+    background-color: white;
+    border-radius: 14px;
+    border: solid 1px #bcbcbc;
+    /* object-fit: contain; */
+  }
+
+  .btn-right {
+    /* width: 24px; */
+    height: 24px;
+    margin: 5px 0 5px 5px;
+    background-color: white;
+    border-radius: 14px;
+    border: solid 1px #bcbcbc;
+    /* object-fit: contain; */
+  }
+
+  .span7 {
+    /* width: 59px; */
+    height: 25px;
+    font-family: PingFangTC;
+    margin: 5px 0 5px 0;
+    font-size: 18px;
+    display: inline;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #07304e;
+  }
+
+  .foooter-select{
+    width: 11.458%;
+	  height: 65.3%;
+	  margin: 5px 10px 5px 5px;
+	  padding: 12px 16px 12px 16px;
+	  border-radius: 11px;
+	  border: solid 1px #bcbcbc;
+	  background-color: #fff;
+  }
+
+  .btn{
+    border: solid 1px #bcbcbc;
+    border-radius: 14px;
   }
