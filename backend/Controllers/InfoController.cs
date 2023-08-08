@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.IO.Compression;
 using System.Xml.Schema;
 using System.Threading;
@@ -29,14 +31,30 @@ namespace backend.Controllers
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var info = this._DBContext.Data.ToList();
+            var info = this._DBContext.Data.Select( x => new {
+                productNum = x.Productnum,
+                productName = x.Productname,
+                company = x.Company,
+                approvalDate = x.Approvaldate,
+                startDate = x.Startdate,
+                endDate = x.Enddate
+            }).ToList();
             return Ok(info);
         }
 
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
         {
-            var info = this._DBContext.Data.FirstOrDefault(o => o.Productnum == productNum);
+            var info = this._DBContext.Data.Where(o => o.Productnum == productNum).Select( x =>
+                new {
+                    productNum = x.Productnum,
+                    productName = x.Productname,
+                    company = x.Company,
+                    approvalDate = x.Approvaldate,
+                    startDate = x.Startdate,
+                    endDate = x.Enddate
+                }
+            );
             return Ok(info);
         }
 
