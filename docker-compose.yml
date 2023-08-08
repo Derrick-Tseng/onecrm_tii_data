@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+
+  postgres:
+    image: postgres:15.1
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psg1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+
+#  create table data
+# (
+#     productNum varchar(30) PRIMARY KEY,
+#     productName varchar(30),
+#     approvalData date,
+#     startDate date,
+#     endDate date,
+#     approvalNum varchar(30),
+#     company varchar(30),
+#     productContent bytea[],
+#     treaty bytea[],
+#     rate bytea[]
+# );
