@@ -1,7 +1,10 @@
 import '../css/Content.css';
+import Popup from './Popup';
+import React, {useState } from "react";
 
 
-function GetResultBoxs({info}){
+function GetResultBoxs({info, setIsPopup, isPopup}){
+    const [modalContent, setModalContent] = useState(null);
     const itemList = info.map(item => 
         // <ResultBox info={item}/>
         
@@ -11,9 +14,11 @@ function GetResultBoxs({info}){
             <span className='DCB'>{item.code}</span>
             <span className='span2'>{item.productName}</span>
             <span className='span3'>{item.status}</span>
-            <button className='btn'>查看</button>
+            <button type="button" onClick={()=>setModalContent(item.code)} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open PDF</button>
+            <Popup productNum={modalContent}/>
         </div>
     );
+    
     return itemList;
 }
 
@@ -95,7 +100,8 @@ function Content() {
 
     const pages = ["1", "2", "3"]
     const filter_btn_content = ["abc", "def", "ghi"]
-    
+    const [isPopup, setIsPopup] = useState(false);
+
   	return (
     	<div className="Content">
             
@@ -103,7 +109,7 @@ function Content() {
                 <GetFilterBtn dataList={filter_btn_content} />    
             </div>
             <TitleBox/>
-            <GetResultBoxs info={info}/>
+            <GetResultBoxs info={info} setIsPopup={setIsPopup} isPopup={isPopup}/>
             <div class="Rectangle-3019">
                 <div class="Group-69595">
                     <div class="Group-69454">
