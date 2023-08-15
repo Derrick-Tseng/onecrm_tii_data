@@ -13,6 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(opt =>{
+    opt.AddPolicy("CorsPolicy", policy=>{
+        policy.AllowAnyHeader().AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5000");
+    });
+});
+
 builder.Services.AddDbContext<postgresContext>(options =>{
     options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
 });
@@ -32,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("CorsPolicy");
 
 app.Run();

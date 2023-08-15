@@ -26,7 +26,7 @@ function Header() {
     	<div className="Header">
      		<div class="Rectangle-2763"></div>
       		<div class="Rectangle-2883">
-				<img src="https://onecrm.tw/images/logo-v2-004.png" class="Group-69526"/>
+				<img src="https://onecrm.tw/images/logo-v2-004.png" className="Group-69526"/>
         		<span className="h-span1">搜尋</span>
         		<SearchBox placeholder="壽險公司" dataList={dataList}/>
         		<SearchBox placeholder="停售" dataList={dataList}/>

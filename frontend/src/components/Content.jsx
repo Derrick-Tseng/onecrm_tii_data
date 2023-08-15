@@ -1,26 +1,48 @@
 import '../css/Content.css';
 import Popup from './Popup';
 import React, {useState } from "react";
+import { apiGetInfoById } from "../api/agent.js"; 
 
+function setModal(productNum, setModalContentId, setModalContent){
+    setModalContentId(productNum);
+    apiGetInfoById(productNum)
+    .then(res =>{
+        const item = res.data[0];
+        setModalContent(
+            <>
+                <div>{item.productNum}</div>
+                <div>{item.productName}</div>
+            </>
+        );
+    })
+    .catch(err=> {
+        setModalContent(
+            <>
+                <div>Data Not Found</div>
+            </>
+        );
+        console.log(err);
+    })
+}
 
 function GetResultBoxs({info, setIsPopup, isPopup}){
+    const [modalContentId, setModalContentId] = useState(null);
     const [modalContent, setModalContent] = useState(null);
     const itemList = info.map(item => 
-        // <ResultBox info={item}/>
-        
         <div className="Group-69612" key={item.code}>
             <input type="checkbox" className="cb2" id="cb" name={item.code}></input>
             <span className='span1'>{item.compayName}</span>
             <span className='DCB'>{item.code}</span>
             <span className='span2'>{item.productName}</span>
             <span className='span3'>{item.status}</span>
-            <button type="button" onClick={()=>setModalContent(item.code)} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Open PDF</button>
-            <Popup productNum={modalContent}/>
+            <button type="button" onClick={()=>setModal(item.code, setModalContentId, setModalContent)} class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">查看</button>
+            <Popup productNum={modalContentId} content={modalContent} setModalContent={setModalContent}/>
         </div>
     );
     
     return itemList;
 }
+
 
 function TitleBox(){
     return (
@@ -35,6 +57,7 @@ function TitleBox(){
     )
 }
 
+
 function FooterPageSelect({dataList}){
 	const listItem = dataList.map(item => 
 		<option key={item} value={item}>{item}</option>
@@ -45,8 +68,8 @@ function FooterPageSelect({dataList}){
       		{listItem}
     	</select>
   	);
-  
 }
+
 
 function GetFilterBtn({dataList}){
     const listItem = dataList.map(item => 
@@ -59,18 +82,19 @@ function GetFilterBtn({dataList}){
   	);
 }
 
+
 function Content() {
     const info = [
         {
             "compayName": "aaa",
-            "code": "111",
+            "code": "123123",
             "productName" : "a1a1a1",
             "status": "selling",
             "href": "123.com"
         },
         {
             "compayName": "bbb",
-            "code": "222",
+            "code": "aa1234",
             "productName" : "b2b2b2",
             "status": "selling",
             "href": "456.com"
@@ -84,14 +108,14 @@ function Content() {
         },
         {
             "compayName": "ccc",
-            "code": "333",
+            "code": "444",
             "productName" : "c3c3c3",
             "status": "selling",
             "href": "789.com"
         },
         {
             "compayName": "ccc",
-            "code": "333",
+            "code": "555",
             "productName" : "c3c3c3",
             "status": "selling",
             "href": "789.com"
