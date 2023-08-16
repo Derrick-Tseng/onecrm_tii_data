@@ -1,3 +1,4 @@
+using System.Xml.XPath;
 using System.Xml.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.IO.Compression;
@@ -37,7 +38,8 @@ namespace backend.Controllers
                 company = x.Company,
                 approvalDate = x.Approvaldate,
                 startDate = x.Startdate,
-                endDate = x.Enddate
+                endDate = x.Enddate,
+                status = x.Status
             }).ToList();
             return Ok(info);
         }
@@ -52,7 +54,8 @@ namespace backend.Controllers
                     company = x.Company,
                     approvalDate = x.Approvaldate,
                     startDate = x.Startdate,
-                    endDate = x.Enddate
+                    endDate = x.Enddate,
+                    status = x.Status
                 }
             );
             return Ok(info);

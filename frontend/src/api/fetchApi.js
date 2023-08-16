@@ -1,6 +1,18 @@
 
 import blobToBase64 from '../helper.js'
-import { apiGetInfoById, apiGetProductContentPdf, apiGetTreatyPdf, apiGetRatePdf } from './agent';
+import { apiGetAllInfo, apiGetInfoById, apiGetProductContentPdf, apiGetTreatyPdf, apiGetRatePdf } from './agent';
+
+export function getAll(){
+    apiGetAllInfo()
+    .then(res=>{
+        // console.log(JSON.stringify(res.data));
+        return res;
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
 
 export function getProductInfo(productNum, setModalContent){
     apiGetInfoById(productNum)
@@ -8,8 +20,14 @@ export function getProductInfo(productNum, setModalContent){
         const item = res.data[0];
         setModalContent(
             <>
-                <div>{item.productNum}</div>
-                <div>{item.productName}</div>
+                <div>產品編號：{item.productNum}</div>
+                <div>產品名稱：{item.productName}</div>
+                <div>產品狀態：{item.status}</div>
+                <div>發行公司：{item.company}</div>
+                <div>核准編號：{item.approvalNum}</div>
+                <div>核准日期：{item.approvalDate}</div>
+                <div>起售日：{item.startDate}</div>
+                <div>停售日：{item.endDate}</div>
             </>
         );
     })
@@ -22,6 +40,7 @@ export function getProductInfo(productNum, setModalContent){
         console.log(err);
     })
 }
+
 
 export function getProductContentPdf(productNum, setModalContent){
     apiGetProductContentPdf(productNum)
@@ -60,6 +79,7 @@ export function getProductContentPdf(productNum, setModalContent){
     //     console.log(err);
     // });
 }
+
 
 export function getTreatyPdf(productNum, setModalContent){
     apiGetTreatyPdf(productNum)
