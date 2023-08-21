@@ -20,9 +20,9 @@ volumes:
 # (
 #     productNum varchar(30) PRIMARY KEY,
 #     productName varchar(30),
-#     approvalData date,
-#     startDate date,
-#     endDate date,
+#     approvalDate varchar(15),
+#     startDate varchar(15),
+#     endDate varchar(15),
 #     approvalNum varchar(30),
 #     company varchar(30),
 #     productContent bytea[],
