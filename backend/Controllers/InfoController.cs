@@ -81,6 +81,89 @@ namespace backend.Controllers
             this._DBContext.SaveChanges();
             // return Ok(true);
             return CreatedAtAction("GetAll", info.Productnum, info);
+        }
+
+        [HttpPost("Search")]
+        public IActionResult Search([FromQuery] SearchObj request)
+        {
+            if (request.SearchBar != null && request.SearchBar.Length != 0){
+                //search bar
+                var info = this._DBContext.Data.Where(o => 
+                    o.Productnum == request.SearchBar || o.Productname == request.SearchBar
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                );
+                return Ok(info);
+            }
+            else if(request.Company != null && request.Company.Length != 0 && request.Status != null && request.Status.Length != 0){
+                // filtered by company and status
+                var info = this._DBContext.Data.Where(o => 
+                    o.Company == request.Company && o.Status == request.Status
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                );
+                return Ok(info);
+            }
+            else if (request.Company == null && request.Status != null){
+                // filtered only by status
+                var info = this._DBContext.Data.Where(o => 
+                    o.Status == request.Status
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                );
+                return Ok(info);
+            }
+            else if(request.Company != null && request.Status == null){
+                // filtered by company
+                var info = this._DBContext.Data.Where(o => 
+                    o.Company == request.Company
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                );
+                return Ok(info);
+            }
+            else{
+                return Ok(false);
+            }
         }        
+    }
+
+    public class SearchObj
+    {
+        public string ?Company { get; set; }
+        public string ?Status { get; set; }
+        public string ?SearchBar { get; set; }
     }
 } 
