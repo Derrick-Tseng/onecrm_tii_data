@@ -10,10 +10,11 @@ const pdfRequest = axios.create({
 });
 
 // info 相關的 api
-export const apiGetAllInfo = () => infoRequest.get('/GetAll');
-export const apiGetInfoById = (id) => infoRequest.get('/GetInfo/'+ id);
+export const apiGetAll = () => infoRequest.get('/GetAll');
+export const apiGetInfoList = (limit, page) => infoRequest.get('/GetList?limit=' + limit + '&page=' + page);
+export const apiGetInfoById = (id) => infoRequest.get('/GetInfo/' + id);
 
 // pdf 相關的 api
-export const apiGetProductContentPdf = data => pdfRequest.get('/GetProductContentPdf/'+ data);
-export const apiGetTreatyPdf = data => pdfRequest.get('/GetTreatyPdf/'+ data);
-export const apiGetRatePdf = data => pdfRequest.get('/GetRatePdf/'+ data);
+export const apiGetProductContentPdf = data => pdfRequest.get('/GetProductContentPdf/' + data);
+export const apiGetTreatyPdf = data => pdfRequest.get('/GetTreatyPdf/' + data);
+export const apiGetRatePdf = data => pdfRequest.get('/GetRatePdf/' + data);

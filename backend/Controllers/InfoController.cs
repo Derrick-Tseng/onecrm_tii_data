@@ -44,6 +44,23 @@ namespace backend.Controllers
             return Ok(info);
         }
 
+        [HttpGet("GetList")]
+        public IActionResult GetList(string limit, string page)
+        {
+            var lim = int.Parse(limit);
+            var pg = int.Parse(page);
+            var info = this._DBContext.Data.Select( x => new {
+                productNum = x.Productnum,
+                productName = x.Productname,
+                company = x.Company,
+                approvalDate = x.Approvaldate,
+                startDate = x.Startdate,
+                endDate = x.Enddate,
+                status = x.Status
+            }).ToList().Skip((pg-1) * lim).Take(lim);
+            return Ok(info);
+        }
+
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
         {

@@ -1,8 +1,8 @@
 import '../css/Content.css';
 import Popup from './Popup';
-import React, {useState } from "react";
-import { apiGetAllInfo, apiGetInfoById } from "../api/agent.js"; 
-// import {getAll} from "../api/fetchApi"
+import React, {useState, useMemo } from "react";
+import { apiGetAllInfo, apiGetInfoById, apiGetInfoList } from "../api/agent.js";
+
 
 function setModal(productNum, setModalContentId, setModalContent){
     setModalContentId(productNum);
@@ -32,8 +32,10 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-async function getAll(setInfoList){
-    await apiGetAllInfo()
+async function getAll(setInfoList, limit, page){
+    // await apiGetAllInfo()
+    // console.log(limit," ", page)
+    await apiGetInfoList(limit, page)
     .then(res=>{
         // console.log(res.data);
         setInfoList(res.data);
@@ -47,7 +49,11 @@ async function getAll(setInfoList){
 }
 
 
-function GetResultBoxs({info}){
+function RenderItems({info}){
+    // const itemList = todosForDisplay.map(x => 
+    //     <li key={x.productNum}>{x.productName}</li>
+    // );
+    // return itemList;
     const [modalContentId, setModalContentId] = useState(null);
     const [modalContent, setModalContent] = useState(null);
     const itemList = info.map(item => 
@@ -80,16 +86,16 @@ function TitleBox(){
 }
 
 
-function FooterPageSelect({dataList}){
+function FooterPageSelect({dataList, setTodosPerPage}){
 	const listItem = dataList.map(item => 
-		<option key={item} value={item}>{item}</option>
+		<option onClick={()=>setTodosPerPage(parseInt(listItem))} key={item} value={item}>{item}</option>
   	);
   	return (
     	<select className='foooter-select'>
       		<option value="1" disabled>1</option>
       		{listItem}
     	</select>
-  	);
+    );
 }
 
 
@@ -105,32 +111,55 @@ function GetFilterBtn({dataList}){
 }
 
 
+
+
 function Content() {
     // info = JSON.stringify(info)
     const [infoList, setInfoList] = useState([]);
     // getAll(setInfoList)
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [todosPerPage, setTodosPerPage] = useState(2);
+    const lastTodoInView = currentPage * todosPerPage;
+    const firstTodoInView = lastTodoInView - todosPerPage;
+    const todosForDisplay = infoList.slice(firstTodoInView, lastTodoInView);
+
+    const pageNumbers = [];
+    
+    for (let n = 1; n <= Math.ceil(infoList.length / todosPerPage); n++) {
+        pageNumbers.push(n);
+    }
+    
+    const renderPageNumbers = pageNumbers.map((number, index) => {
+        // console.log(number, " ", index)
+        return <button onClick={() => setCurrentPage(number)} key={index}>
+            {number}
+        </button>
+    });
+    
     const pages = ["1", "2", "3"]
     const filter_btn_content = ["abc", "def", "ghi"]
 
   	return (
     	<div className="Content">
-            <button onClick={()=>getAll(setInfoList)}>查詢</button>
+            <button onClick={()=>getAll(setInfoList, todosPerPage, currentPage)}>查詢</button>
             <div className="Rectangle-825">
                 <GetFilterBtn dataList={filter_btn_content} />    
             </div>
             <TitleBox/>
-            <GetResultBoxs info={infoList}/>
+            <RenderItems info={todosForDisplay}/>
+            <div className="numbers">{renderPageNumbers}</div>
+            {/* <GetResultBoxs info={infoList}/> */}
             <div className="Rectangle-3019">
                 <div className="Group-69595">
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
-                        <FooterPageSelect placeholder='123' dataList={pages}/>
-                        <span className="span6">共 30 頁</span>
+                        <FooterPageSelect placeholder='123' dataList={pages} setTodosPerPage={setTodosPerPage}/>
+                        <span className="span6">共 {pageNumbers.length} 頁</span>
                     </div>
                     <div className="Group-69455">
                         <button className='btn-left'>上一頁</button>
-                        <span className='span7'>18</span>
+                        <span className='span7'>{currentPage}</span>
                         <button className='btn-right'>下一頁</button>
                     </div>
                 </div>

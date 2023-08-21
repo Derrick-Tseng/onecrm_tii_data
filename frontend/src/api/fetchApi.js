@@ -1,11 +1,21 @@
 
 import blobToBase64 from '../helper.js'
-import { apiGetAllInfo, apiGetInfoById, apiGetProductContentPdf, apiGetTreatyPdf, apiGetRatePdf } from './agent';
+import { apiGetAll, apiGetInfoList,apiGetInfoById, apiGetProductContentPdf, apiGetTreatyPdf, apiGetRatePdf } from './agent';
 
 export function getAll(){
-    apiGetAllInfo()
+    apiGetAll()
     .then(res=>{
         // console.log(JSON.stringify(res.data));
+        return res;
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+export function getList(limit, page){
+    apiGetInfoList(limit, page)
+    .then(res=>{
         return res;
     })
     .catch(err=>{
