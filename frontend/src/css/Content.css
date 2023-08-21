@@ -47,7 +47,7 @@ table {
 }
  
  .Rectangle-825 {
-    width: 1920px;
+    width: 90%;
     height: 35px;
     border-radius: 5px;
     margin: 20px 0 20px 10%;
@@ -66,18 +66,50 @@ table {
     border-width: 0px;
   }
 
-  .Rectangle-2870 {
-    width: 1082px;
+  /* .Rectangle-2870 {
+    width: 1100px;
     height: 58px;
-    margin:3px 10% 0 10%;
+    margin: 3px 10% 0 10%;
     border-radius: 10px;
     background-color: #efefef;
     display: flex;
 
-  }
+  } */
 
-  .Group-69612 {
-    width: 1082px;
+
+  
+  
+  
+  
+  .shared-title-span-style {
+    flex: 1; /* 自動平均分配寬度 */
+    height: 22px;
+    margin: 18px 0 0 0;
+    padding-right: 130px;
+    font-family: PingFangTC;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #00254a;
+    display: inline-block;
+  }
+  
+  .Rectangle-2870 {
+    width: 1100px;
+    height: 58px;
+    margin: 3px 10% 0 10%;
+    border-radius: 10px;
+    background-color: #efefef;
+    display: flex;
+    align-items: center; /* 垂直置中 */
+  }
+  
+  /* .Group-69612 {
+    width: 1100px;
     height: 78px;
     padding: 0 0 0 0.7px;
     border-style:solid;
@@ -86,7 +118,38 @@ table {
     border:1px solid grey;  
     margin:3px 10% 0 10%;
     display: flex;
-  }
+    
+  } */
+  .shared-span-style {
+  width: 33.33%; /* 將寬度均分為三份 */
+  height: 22px;
+  margin: 30px 0 28px 0;
+  font-family: PingFangTC;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #00254a;
+  /* border: 1px solid grey;   */
+  display: inline-block;
+}
+
+.Group-69612 {
+  width: 1100px;
+  height: 78px;
+  padding: 0 0 0 0.7px;
+  border-style: solid;
+  border-radius: 10px;
+  border-collapse: collapse;
+  border: 2px solid grey;  
+  margin: 3px 10% 0 10%;
+  display: flex;
+  /* align-items: center; 垂直置中 */
+  justify-content: space-between; /* 左右對齊 */
+}
 
   
   .Content{
@@ -121,8 +184,8 @@ table {
     object-fit: contain;
   }
 
-  .titile_span1{
-    width: 100px;
+  /* .titile_span1{
+    width: 140px;
     height: 22px;
     margin: 20px 20px 18px 50px;
     font-family: PingFangTC;
@@ -135,11 +198,12 @@ table {
     text-align: left;
     color: #00254a;
     border:1px solid grey;  
-    display: inline;
+    display: flex;
+    align-items: center;
   }
 
   .titile_DCB {
-    width: 68px;
+    width: 100px;
     height: 22px;
     margin: 20px 16px 18px 50px;
     font-family: PingFangTC;
@@ -170,7 +234,7 @@ table {
     color: #00254a;
     border:1px solid grey;  
     display: inline;
-  }
+  } */
 
   .titile_span3 {
     width: 90px;
@@ -188,9 +252,9 @@ table {
     border:1px solid grey;  
     display: inline;
   }
-
+/* 
   .span1 {
-    width: 102px;
+    width: 400px;
     height: 22px;
     margin: 30px 20px 28px 35px;
     font-family: PingFangTC;
@@ -200,14 +264,15 @@ table {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: left;
+    text-align: center;
     color: #00254a;
     border:1px solid grey;  
     display: inline;
+    white-space: nowrap;
   }
 
   .DCB {
-    width: 68px;
+    width: 300px;
     height: 22px;
     margin: 30px 16px 28px 50px;
     font-family: PingFangTC;
@@ -217,14 +282,16 @@ table {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: left;
+    text-align: center;
     color: #00254a;
     border:1px solid grey;  
     display: inline;
+    white-space: nowrap;
+
   }
 
   .span2 {
-    width: 80px;
+    width: 550px;
     height: 22px;
     margin: 30px 214px 28px 50px;
     font-family: PingFangTC;
@@ -234,11 +301,13 @@ table {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: left;
+    text-align: center;
     color: #00254a;
     border:1px solid grey;  
     display: inline;
-  }
+    white-space: nowrap;
+
+  } */
 
   .span3 {
     width: 90px;
@@ -274,7 +343,7 @@ table {
   }
 
   .Rectangle-3019 {
-    width: 1920px;
+    width: 100%;
     height: 65px;
     margin: 1px 0 0;
     padding: 14px 40px 14px 535px;
