@@ -32,17 +32,15 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-async function getAll(setInfoList, limit, page){
+async function getAll(setInfoList, limit, page, setPageNum){
     // await apiGetAllInfo()
-    // console.log(limit," ", page)
     await apiGetInfoList(limit, page)
     .then(res=>{
-        // console.log(res.data);
-        setInfoList(res.data);
+        setInfoList(res.data.data);
+        setPageNum(res.data.pages);
         return 
     })
     .catch(err=>{
-        // setInfoList(null)
         console.log(err)
         return 
     })
@@ -110,57 +108,67 @@ function GetFilterBtn({dataList}){
   	);
 }
 
+function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit){
+    console.log("prev", prev)
+    setCurrentPage(prev);
+    getAll(setInfoList, limit, prev, setPageNum);
+}
 
+function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit){
+    console.log("next", next)
+    setCurrentPage(next);
+    getAll(setInfoList, limit, next, setPageNum);
+}
 
 
 function Content() {
-    // info = JSON.stringify(info)
     const [infoList, setInfoList] = useState([]);
-    // getAll(setInfoList)
 
     const [currentPage, setCurrentPage] = useState(1);
     const [todosPerPage, setTodosPerPage] = useState(2);
-    const lastTodoInView = currentPage * todosPerPage;
-    const firstTodoInView = lastTodoInView - todosPerPage;
-    const todosForDisplay = infoList.slice(firstTodoInView, lastTodoInView);
+    const [pageNum, setPageNum] = useState(0);
 
-    const pageNumbers = [];
+    // const pageNumbers = [];
     
-    for (let n = 1; n <= Math.ceil(infoList.length / todosPerPage); n++) {
-        pageNumbers.push(n);
-    }
+    // for (let n = 1; n <= Math.ceil(infoList.length / todosPerPage); n++) {
+    //     pageNumbers.push(n);
+    // }
     
-    const renderPageNumbers = pageNumbers.map((number, index) => {
-        // console.log(number, " ", index)
-        return <button onClick={() => setCurrentPage(number)} key={index}>
-            {number}
-        </button>
-    });
+    // const renderPageNumbers = pageNumbers.map((number, index) => {
+    //     // console.log(number, " ", index)
+    //     return <button onClick={() => setCurrentPage(number)} key={index}>
+    //         {number}
+    //     </button>
+    // });
+
     
-    const pages = ["1", "2", "3"]
+    var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
+    var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
+
+    const pagesSelect = ["1", "2", "3"]
     const filter_btn_content = ["abc", "def", "ghi"]
 
-  	return (
+    return (
     	<div className="Content">
-            <button onClick={()=>getAll(setInfoList, todosPerPage, currentPage)}>查詢</button>
+            <button onClick={()=>getAll(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
             <div className="Rectangle-825">
                 <GetFilterBtn dataList={filter_btn_content} />    
             </div>
             <TitleBox/>
-            <RenderItems info={todosForDisplay}/>
-            <div className="numbers">{renderPageNumbers}</div>
+            <RenderItems info={infoList}/>
+            {/* <div className="numbers">{renderPageNumbers}</div> */}
             {/* <GetResultBoxs info={infoList}/> */}
             <div className="Rectangle-3019">
                 <div className="Group-69595">
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
-                        <FooterPageSelect placeholder='123' dataList={pages} setTodosPerPage={setTodosPerPage}/>
-                        <span className="span6">共 {pageNumbers.length} 頁</span>
+                        <FooterPageSelect placeholder='123' dataList={pagesSelect} setTodosPerPage={setTodosPerPage}/>
+                        <span className="span6">共 {pageNum} 頁</span>
                     </div>
                     <div className="Group-69455">
-                        <button className='btn-left'>上一頁</button>
+                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage)}>上一頁</button>
                         <span className='span7'>{currentPage}</span>
-                        <button className='btn-right'>下一頁</button>
+                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
                     </div>
                 </div>
             </div>
