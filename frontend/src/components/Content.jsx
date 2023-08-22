@@ -1,7 +1,7 @@
 import '../css/Content.css';
 import Popup from './Popup';
-import React, {useState, useMemo } from "react";
-import { apiGetAllInfo, apiGetInfoById, apiGetInfoList } from "../api/agent.js";
+import React, {useState} from "react";
+import { apiGetInfoById, apiGetInfoList } from "../api/agent.js";
 
 
 function setModal(productNum, setModalContentId, setModalContent){
@@ -84,14 +84,39 @@ function TitleBox(){
 }
 
 
-function FooterPageSelect({dataList, setTodosPerPage}){
+function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPageNum, currentPage}){
 	const listItem = dataList.map(item => 
-		<option onClick={()=>setTodosPerPage(parseInt(listItem))} key={item} value={item}>{item}</option>
+		<option key={item} value={item}>{item}</option>
   	);
+
+    const handleChange = (e) => {
+        setCurrentPage(e.target.value);
+        getAll(setInfoList, limit, e.target.value, setPageNum);
+    };
+
   	return (
-    	<select className='foooter-select'>
-      		<option value="1" disabled>1</option>
-      		{listItem}
+    	<select value={currentPage} id="footer-select" className='footer-select' onChange={handleChange}>
+      		<option value="" disabled hidden>Page</option>
+            {listItem}
+    	</select>
+    );
+}
+
+function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageNum, todosPerPage, setCurrentPage}){
+	const listItem = dataList.map(item => 
+		<option key={item} value={item}>{item}</option>
+  	);
+
+    const handleChange = (e) => {
+        setTodosPerPage(parseInt(e.target.value));
+        setCurrentPage(1)
+        getAll(setInfoList, parseInt(e.target.value), 1, setPageNum);
+    };
+
+  	return (
+    	<select value={todosPerPage} id="footer-select" className='footer-select' onChange={handleChange}>
+      		<option value="" disabled hidden>Page</option>
+            {listItem}
     	</select>
     );
 }
@@ -141,12 +166,16 @@ function Content() {
     //     </button>
     // });
 
-    
     var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
     var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
 
-    const pagesSelect = ["1", "2", "3"]
+    const pagesSelect = []
     const filter_btn_content = ["abc", "def", "ghi"]
+    const pagesLimitSelect = [1, 2, 3, 4]
+
+    for(let i=1; i<=pageNum; i++){
+        pagesSelect.push(i);
+    }
 
     return (
     	<div className="Content">
@@ -156,13 +185,15 @@ function Content() {
             </div>
             <TitleBox/>
             <RenderItems info={infoList}/>
-            {/* <div className="numbers">{renderPageNumbers}</div> */}
-            {/* <GetResultBoxs info={infoList}/> */}
+            {/* <div className="numbers">{FooterPageSelect}</div>  */}
             <div className="Rectangle-3019">
                 <div className="Group-69595">
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
-                        <FooterPageSelect placeholder='123' dataList={pagesSelect} setTodosPerPage={setTodosPerPage}/>
+                        <FooterPageLimitSelect dataList={pagesLimitSelect} setTodosPerPage={setTodosPerPage} setInfoList={setInfoList} setPageNum={setPageNum} todosPerPage={todosPerPage} setCurrentPage={setCurrentPage} />
+                        <span className='span5'>Page Select</span>
+                        <FooterPageSelect dataList={pagesSelect} setCurrentPage={setCurrentPage} setInfoList={setInfoList} limit={todosPerPage}  setPageNum={setPageNum} currentPage={currentPage} />
+                        
                         <span className="span6">共 {pageNum} 頁</span>
                     </div>
                     <div className="Group-69455">
