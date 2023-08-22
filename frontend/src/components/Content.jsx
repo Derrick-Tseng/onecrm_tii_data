@@ -32,8 +32,7 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-async function getAll(setInfoList, limit, page, setPageNum){
-    // await apiGetAllInfo()
+async function getList(setInfoList, limit, page, setPageNum){
     await apiGetInfoList(limit, page)
     .then(res=>{
         setInfoList(res.data.data);
@@ -91,7 +90,7 @@ function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPage
 
     const handleChange = (e) => {
         setCurrentPage(e.target.value);
-        getAll(setInfoList, limit, e.target.value, setPageNum);
+        getList(setInfoList, limit, e.target.value, setPageNum);
     };
 
   	return (
@@ -110,7 +109,7 @@ function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageN
     const handleChange = (e) => {
         setTodosPerPage(parseInt(e.target.value));
         setCurrentPage(1)
-        getAll(setInfoList, parseInt(e.target.value), 1, setPageNum);
+        getList(setInfoList, parseInt(e.target.value), 1, setPageNum);
     };
 
   	return (
@@ -136,13 +135,13 @@ function GetFilterBtn({dataList}){
 function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit){
     console.log("prev", prev)
     setCurrentPage(prev);
-    getAll(setInfoList, limit, prev, setPageNum);
+    getList(setInfoList, limit, prev, setPageNum);
 }
 
 function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit){
     console.log("next", next)
     setCurrentPage(next);
-    getAll(setInfoList, limit, next, setPageNum);
+    getList(setInfoList, limit, next, setPageNum);
 }
 
 
@@ -179,7 +178,7 @@ function Content() {
 
     return (
     	<div className="Content">
-            <button onClick={()=>getAll(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
+            <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
             <div className="Rectangle-825">
                 <GetFilterBtn dataList={filter_btn_content} />    
             </div>
