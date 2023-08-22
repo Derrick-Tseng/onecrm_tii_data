@@ -58,7 +58,18 @@ namespace backend.Controllers
                 endDate = x.Enddate,
                 status = x.Status
             }).ToList().Skip((pg-1) * lim).Take(lim);
-            return Ok(info);
+
+            var amount = info.Count();
+
+            // count how many pages
+            var n =this._DBContext.Data.Count();
+            double k  = Math.Ceiling((double)n/lim);
+
+            var retInfo = new {
+                pages = k,
+                data = info
+            };
+            return Ok(retInfo);
         }
 
         [HttpGet("GetInfo/{productNum}")] 
