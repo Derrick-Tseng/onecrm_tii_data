@@ -47,10 +47,6 @@ async function getList(setInfoList, limit, page, setPageNum){
 
 
 function RenderItems({info}){
-    // const itemList = todosForDisplay.map(x => 
-    //     <li key={x.productNum}>{x.productName}</li>
-    // );
-    // return itemList;
     const [modalContentId, setModalContentId] = useState(null);
     const [modalContent, setModalContent] = useState(null);
     const itemList = info.map(item => 
@@ -121,16 +117,16 @@ function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageN
 }
 
 
-function GetFilterBtn({dataList}){
-    const listItem = dataList.map(item => 
-        <button className="btn-filter" value={item} key={item}>{item}</button>
-  	);
-  	return (
-        <>
-            {listItem}
-        </>
-  	);
-}
+// function GetFilterBtn({dataList}){
+//     const listItem = dataList.map(item => 
+//         <button className="btn-filter" value={item} key={item}>{item}</button>
+//   	);
+//   	return (
+//         <>
+//             {listItem}
+//         </>
+//   	);
+// }
 
 function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit){
     console.log("prev", prev)
@@ -169,8 +165,13 @@ function Content() {
     var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
 
     const pagesSelect = []
-    const filter_btn_content = ["abc", "def", "ghi"]
+    const filter_btn_content = []
     const pagesLimitSelect = [1, 2, 3, 4]
+
+    // for(let i=0; i<companySelect.length; i++){
+    //     filter_btn_content.push(companySelect[i]);
+    // }
+    // console.log(companySelect)
 
     for(let i=1; i<=pageNum; i++){
         pagesSelect.push(i);
@@ -179,12 +180,11 @@ function Content() {
     return (
     	<div className="Content">
             <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
-            <div className="Rectangle-825">
+            {/* <div className="Rectangle-825">
                 <GetFilterBtn dataList={filter_btn_content} />    
-            </div>
+            </div> */}
             <TitleBox/>
             <RenderItems info={infoList}/>
-            {/* <div className="numbers">{FooterPageSelect}</div>  */}
             <div className="Rectangle-3019">
                 <div className="Group-69595">
                     <div className="Group-69454">

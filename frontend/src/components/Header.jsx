@@ -1,38 +1,103 @@
 import '../css/Header.css';
+import React, {useState} from "react";
 
-function SearchBox({placeholder, dataList}){
-	const listItem = dataList.map(item => 
+function SearchBoxCompany({placeholder, companyList, setCompanySelect, companySelect}){
+	const listItem = companyList.map(item => 
 		<option key={item} value={item}>{item}</option>
   	);
+
+	  const handleChange = (e) => {
+		var tmp = [...companySelect];
+		tmp.push(e.target.value);
+		setCompanySelect(tmp)
+    };
+
   	return (
-    	<select className='header-select'>
+    	<select className='header-select' onChange={handleChange}>
       		<option value="None" disabled>{placeholder}</option>
       		{listItem}
     	</select>
   	);
-  
+}
+
+function SearchBoxStatus({placeholder, statusList, setSatusSelect}){
+	const listItem = statusList.map(item => 
+		<option key={item} value={item}>{item}</option>
+  	);
+
+	  const handleChange = (e) => {
+		setSatusSelect(e.target.value)
+    };
+
+  	return (
+    	<select className='header-select' onChange={handleChange}>
+      		<option value="None" disabled>{placeholder}</option>
+      		{listItem}
+    	</select>
+  	);
+}
+
+function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
+	const tmpSet = new Set();
+	const listItem = []
+
+	const handleClickCompany = (e) => {
+        setCompanySelect(companyList.filter(val => val !== e.target.value));
+    };
+
+	const handleClickStatus = (e) => {
+        setStatusSelect(null);
+    };
+
+	if (status != null){
+		listItem.push( <button className="btn-filter" value={status} key={status} onClick={handleClickStatus}>{status}</button>)
+	}
+
+	for (let i=0; i<companyList.length; i++){
+		if(!tmpSet.has(companyList[i])){
+			listItem.push( <button className="btn-filter" value={companyList[i]} key={companyList[i]} onClick={handleClickCompany}>{companyList[i]}</button>)
+			tmpSet.add(companyList[i]);
+		}
+	}
+  	return (
+        <>
+            {listItem}
+        </>
+  	);
 }
 
 function Header() {
-	// eslint-disable-next-line no-array-constructor
-	const dataList = [
+
+	const [companySelect, setCompanySelect] = useState([]);
+	const [statusSelect, setStatusSelect] = useState(null);
+	const companyList = [
+		'all',
 		'mathematician', 
 		'chemist', 
 		'physicist', 
 		'geologist',
 		'astrophysicist'
 	];
+
+	const statusList = [
+		'全部',
+		'在售',
+		'停售'
+	]
+
   	return (
     	<div className="Header">
      		<div className="Rectangle-2763"></div>
       		<div className="Rectangle-2883">
 				<img src="https://onecrm.tw/images/logo-v2-004.png" className="Group-69526"/>
         		<span className="h-span1">搜尋</span>
-        		<SearchBox placeholder="壽險公司" dataList={dataList}/>
-        		<SearchBox placeholder="停售" dataList={dataList}/>
+        		<SearchBoxCompany placeholder="壽險公司" companyList={companyList} setCompanySelect={setCompanySelect} companySelect={companySelect} />
+        		<SearchBoxStatus placeholder="販售狀態" statusList={statusList} setSatusSelect={setStatusSelect}/>
 				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input'></input>
       		</div>
-        
+			  <div className="Rectangle-825">
+                <GetFilterBtn companyList={companySelect} status={statusSelect} setCompanySelect={setCompanySelect} setStatusSelect={setStatusSelect} />
+            </div>
     	</div>
   	);
 };
