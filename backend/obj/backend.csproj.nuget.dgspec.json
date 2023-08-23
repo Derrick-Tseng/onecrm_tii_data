@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/derricktseng/Desktop/Systex/onecrm_tii_data/backend/backend.csproj": {}
+    "/home/terry/onecrm_tii_data/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/derricktseng/Desktop/Systex/onecrm_tii_data/backend/backend.csproj": {
+    "/home/terry/onecrm_tii_data/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/derricktseng/Desktop/Systex/onecrm_tii_data/backend/backend.csproj",
+        "projectUniqueName": "/home/terry/onecrm_tii_data/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/derricktseng/Desktop/Systex/onecrm_tii_data/backend/backend.csproj",
-        "packagesPath": "/Users/derricktseng/.nuget/packages/",
-        "outputPath": "/Users/derricktseng/Desktop/Systex/onecrm_tii_data/backend/obj/",
+        "projectPath": "/home/terry/onecrm_tii_data/backend/backend.csproj",
+        "packagesPath": "/home/terry/.nuget/packages/",
+        "outputPath": "/home/terry/onecrm_tii_data/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/derricktseng/.nuget/NuGet/NuGet.Config"
+          "/home/terry/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.412/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }

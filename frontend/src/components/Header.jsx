@@ -1,5 +1,7 @@
 import '../css/Header.css';
+
 import React, {useState} from "react";
+
 
 function SearchBoxCompany({placeholder, companyList, setCompanySelect, companySelect}){
 	const listItem = companyList.map(item => 
@@ -94,7 +96,11 @@ function Header() {
         		<SearchBoxCompany placeholder="壽險公司" companyList={companyList} setCompanySelect={setCompanySelect} companySelect={companySelect} />
         		<SearchBoxStatus placeholder="販售狀態" statusList={statusList} setSatusSelect={setStatusSelect}/>
 				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input'></input>
+
+				
+
       		</div>
+			
 			  <div className="Rectangle-825">
                 <GetFilterBtn companyList={companySelect} status={statusSelect} setCompanySelect={setCompanySelect} setStatusSelect={setStatusSelect} />
             </div>

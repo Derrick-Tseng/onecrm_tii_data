@@ -50,12 +50,13 @@ function RenderItems({info}){
     const [modalContentId, setModalContentId] = useState(null);
     const [modalContent, setModalContent] = useState(null);
     const itemList = info.map(item => 
+        
         <div className="Group-69612" key={item.productNum}>
             <input type="checkbox" className="cb2" id="cb" name={item.productNum}></input>
-            <span className='span1'>{item.company}</span>
-            <span className='DCB'>{item.productNum}</span>
-            <span className='span2'>{item.productName}</span>
-            <span className='span3'>{item.status}</span>
+            <span className='shared-span-style span1'>{item.company}</span>
+            <span className='shared-span-style DCB'>{item.productNum}</span>
+            <span className='shared-span-style span2'>{item.productName}</span>
+            {/* <span className='span3'>{item.status}</span> */}
             <button type="button" onClick={()=>setModal(item.productNum, setModalContentId, setModalContent)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">查看</button>
             <Popup productNum={modalContentId} content={modalContent} setModalContent={setModalContent}/>
         </div>
@@ -67,11 +68,12 @@ function RenderItems({info}){
 
 function TitleBox(){
     return (
+        
         <div className="Rectangle-2870">
-            <input type="checkbox" className="cb1" id="cb_title"></input>
-            <span className='titile_span1'>壽險公司</span>
-            <span className='titile_DCB'>代碼</span>
-            <span className='title_span2'>產品名稱</span>
+            {/* <input type="checkbox" className="cb1" id="cb_title"></input> */}
+            <span className='shared-title-span-style span1'>壽險公司</span>
+            <span className='shared-title-span-style DCB'>代碼</span>
+            <span className='shared-title-span-style span2'>產品名稱</span>
             {/* <span className='titile_span3'></span> */}
             {/* <button className='titile_btn'>查看</button> */}
         </div>
@@ -179,7 +181,9 @@ function Content() {
 
     return (
     	<div className="Content">
-            <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
+            <button className="button" onClick={() => getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
+
+            {/* <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button> */}
             {/* <div className="Rectangle-825">
                 <GetFilterBtn dataList={filter_btn_content} />    
             </div> */}
@@ -190,17 +194,22 @@ function Content() {
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
                         <FooterPageLimitSelect dataList={pagesLimitSelect} setTodosPerPage={setTodosPerPage} setInfoList={setInfoList} setPageNum={setPageNum} todosPerPage={todosPerPage} setCurrentPage={setCurrentPage} />
-                        <span className='span5'>Page Select</span>
+                        <span className='span5_2'>Page Select</span>
                         <FooterPageSelect dataList={pagesSelect} setCurrentPage={setCurrentPage} setInfoList={setInfoList} limit={todosPerPage}  setPageNum={setPageNum} currentPage={currentPage} />
                         
                         <span className="span6">共 {pageNum} 頁</span>
                     </div>
+                    {/* <div className="Group-69455">
+                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage)}>上一頁</button>
+                        <span className='span7'>{currentPage}</span>
+                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
+                    </div> */}
+                </div>
                     <div className="Group-69455">
                         <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage)}>上一頁</button>
                         <span className='span7'>{currentPage}</span>
                         <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
                     </div>
-                </div>
             </div>
     	</div>
   	);
