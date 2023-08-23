@@ -1,7 +1,7 @@
 import '../css/Content.css';
 import Popup from './Popup';
 import React, {useState} from "react";
-import { apiGetInfoById, apiGetInfoList } from "../api/agent.js";
+import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox } from "../api/agent.js";
 
 
 function setModal(productNum, setModalContentId, setModalContent){
@@ -32,17 +32,39 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-async function getList(setInfoList, limit, page, setPageNum){
-    await apiGetInfoList(limit, page)
-    .then(res=>{
-        setInfoList(res.data.data);
-        setPageNum(res.data.pages);
-        return 
-    })
-    .catch(err=>{
-        console.log(err)
-        return 
-    })
+async function getList(setInfoList, limit, page, setPageNum, companySelect="all", statusSelect="all", searchbox=""){
+    
+    if(companySelect === null){
+        companySelect = "all";
+    }
+    if(statusSelect === null){
+        statusSelect = "all";
+    }
+
+    if(searchbox !== null){
+        await apiGetInfoListSearchbox(limit, page, searchbox)
+        .then(res=>{
+            setInfoList(res.data.data);
+            setPageNum(res.data.pages);
+            return 
+        })
+        .catch(err=>{
+            console.log(err)
+            return 
+        })
+    }
+    else{
+        await apiGetInfoList(limit, page, companySelect, statusSelect)
+        .then(res=>{
+            setInfoList(res.data.data);
+            setPageNum(res.data.pages);
+            return 
+        })
+        .catch(err=>{
+            console.log(err)
+            return 
+        })
+    }
 }
 
 
@@ -79,14 +101,14 @@ function TitleBox(){
 }
 
 
-function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPageNum, currentPage}){
+function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPageNum, currentPage, companySelect, statusSelect, searchBox}){
 	const listItem = dataList.map(item => 
 		<option key={item} value={item}>{item}</option>
   	);
 
     const handleChange = (e) => {
         setCurrentPage(e.target.value);
-        getList(setInfoList, limit, e.target.value, setPageNum);
+        getList(setInfoList, limit, e.target.value, setPageNum, companySelect, statusSelect, searchBox);
     };
 
   	return (
@@ -97,7 +119,7 @@ function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPage
     );
 }
 
-function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageNum, todosPerPage, setCurrentPage}){
+function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageNum, todosPerPage, setCurrentPage, companySelect, statusSelect, searchBox}){
 	const listItem = dataList.map(item => 
 		<option key={item} value={item}>{item}</option>
   	);
@@ -105,7 +127,7 @@ function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageN
     const handleChange = (e) => {
         setTodosPerPage(parseInt(e.target.value));
         setCurrentPage(1)
-        getList(setInfoList, parseInt(e.target.value), 1, setPageNum);
+        getList(setInfoList, parseInt(e.target.value), 1, setPageNum, companySelect, statusSelect, searchBox);
     };
 
   	return (
@@ -116,62 +138,29 @@ function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageN
     );
 }
 
-
-// function GetFilterBtn({dataList}){
-//     const listItem = dataList.map(item => 
-//         <button className="btn-filter" value={item} key={item}>{item}</button>
-//   	);
-//   	return (
-//         <>
-//             {listItem}
-//         </>
-//   	);
-// }
-
-function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit){
-    console.log("prev", prev)
+function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit, companySelect, statusSelect, searchBox){
     setCurrentPage(prev);
-    getList(setInfoList, limit, prev, setPageNum);
+    getList(setInfoList, limit, prev, setPageNum, companySelect, statusSelect, searchBox);
 }
 
-function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit){
-    console.log("next", next)
+function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit, companySelect, statusSelect, searchBox){
     setCurrentPage(next);
-    getList(setInfoList, limit, next, setPageNum);
+    getList(setInfoList, limit, next, setPageNum, companySelect, statusSelect, searchBox);
 }
 
 
-function Content() {
+function Content({companySelect, statusSelect, searchBox}) {
     const [infoList, setInfoList] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [todosPerPage, setTodosPerPage] = useState(2);
     const [pageNum, setPageNum] = useState(0);
 
-    // const pageNumbers = [];
-    
-    // for (let n = 1; n <= Math.ceil(infoList.length / todosPerPage); n++) {
-    //     pageNumbers.push(n);
-    // }
-    
-    // const renderPageNumbers = pageNumbers.map((number, index) => {
-    //     // console.log(number, " ", index)
-    //     return <button onClick={() => setCurrentPage(number)} key={index}>
-    //         {number}
-    //     </button>
-    // });
-
     var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
     var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
 
     const pagesSelect = []
-    const filter_btn_content = []
     const pagesLimitSelect = [1, 2, 3, 4]
-
-    // for(let i=0; i<companySelect.length; i++){
-    //     filter_btn_content.push(companySelect[i]);
-    // }
-    // console.log(companySelect)
 
     for(let i=1; i<=pageNum; i++){
         pagesSelect.push(i);
@@ -179,26 +168,23 @@ function Content() {
 
     return (
     	<div className="Content">
-            <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum)}>查詢</button>
-            {/* <div className="Rectangle-825">
-                <GetFilterBtn dataList={filter_btn_content} />    
-            </div> */}
+            <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
             <TitleBox/>
             <RenderItems info={infoList}/>
             <div className="Rectangle-3019">
                 <div className="Group-69595">
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
-                        <FooterPageLimitSelect dataList={pagesLimitSelect} setTodosPerPage={setTodosPerPage} setInfoList={setInfoList} setPageNum={setPageNum} todosPerPage={todosPerPage} setCurrentPage={setCurrentPage} />
+                        <FooterPageLimitSelect dataList={pagesLimitSelect} setTodosPerPage={setTodosPerPage} setInfoList={setInfoList} setPageNum={setPageNum} todosPerPage={todosPerPage} setCurrentPage={setCurrentPage}  companySelect={companySelect} statusSelect={statusSelect} searchBox={searchBox} />
                         <span className='span5'>Page Select</span>
-                        <FooterPageSelect dataList={pagesSelect} setCurrentPage={setCurrentPage} setInfoList={setInfoList} limit={todosPerPage}  setPageNum={setPageNum} currentPage={currentPage} />
+                        <FooterPageSelect dataList={pagesSelect} setCurrentPage={setCurrentPage} setInfoList={setInfoList} limit={todosPerPage}  setPageNum={setPageNum} currentPage={currentPage} companySelect={companySelect} statusSelect={statusSelect} searchBox={searchBox}/>
                         
                         <span className="span6">共 {pageNum} 頁</span>
                     </div>
                     <div className="Group-69455">
-                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage)}>上一頁</button>
+                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage,  companySelect, statusSelect, searchBox)}>上一頁</button>
                         <span className='span7'>{currentPage}</span>
-                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
+                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage, companySelect, statusSelect, searchBox)}>下一頁</button>
                     </div>
                 </div>
             </div>

@@ -44,33 +44,7 @@ namespace backend.Controllers
             return Ok(info);
         }
 
-        [HttpGet("GetList")]
-        public IActionResult GetList(string limit, string page)
-        {
-            var lim = int.Parse(limit);
-            var pg = int.Parse(page);
-            var info = this._DBContext.Data.Select( x => new {
-                productNum = x.Productnum,
-                productName = x.Productname,
-                company = x.Company,
-                approvalDate = x.Approvaldate,
-                startDate = x.Startdate,
-                endDate = x.Enddate,
-                status = x.Status
-            }).ToList().Skip((pg-1) * lim).Take(lim);
-
-            var amount = info.Count();
-
-            // count how many pages
-            var n =this._DBContext.Data.Count();
-            double k  = Math.Ceiling((double)n/lim);
-
-            var retInfo = new {
-                pages = k,
-                data = info
-            };
-            return Ok(retInfo);
-        }
+        
 
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
@@ -88,6 +62,148 @@ namespace backend.Controllers
             );
             return Ok(info);
         }
+
+        [HttpGet("GetList")]
+        public IActionResult Search(string limit, string page, [FromQuery] SearchObj request)
+        {
+            var lim = int.Parse(limit);
+            var pg = int.Parse(page);
+            
+            if (request.SearchBox != null && request.SearchBox.Length != 0){
+                //search bar
+                var info = this._DBContext.Data.Where(o => 
+                    o.Productnum == request.SearchBox || o.Productname == request.SearchBox
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                ).ToList().Skip((pg-1) * lim).Take(lim);
+
+                var amount = info.Count();
+                // count how many pages
+                var n =this._DBContext.Data.Where(o => 
+                    o.Productnum == request.SearchBox || o.Productname == request.SearchBox
+                ).Count();
+                double k  = Math.Ceiling((double)n/lim);
+
+                var retInfo = new {
+                    pages = k,
+                    data = info
+                };
+                return Ok(retInfo);
+            }
+            else if(request.Company != "all" && request.Company != null && request.Company.Length != 0 && request.Status != "all" && request.Status != null && request.Status.Length != 0){
+                // filtered by company and status
+                var info = this._DBContext.Data.Where(o => 
+                    o.Company == request.Company && o.Status == request.Status
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                ).ToList().Skip((pg-1) * lim).Take(lim);;
+                var amount = info.Count();
+                // count how many pages
+                var n =this._DBContext.Data.Where(o => 
+                    o.Company == request.Company && o.Status == request.Status
+                ).Count();
+                double k  = Math.Ceiling((double)n/lim);
+
+                var retInfo = new {
+                    pages = k,
+                    data = info
+                };
+                return Ok(retInfo);
+            }
+            else if (request.Company == "all" && request.Status != "all"  && request.Status != null && request.Status.Length != 0){
+                // filtered only by status
+                var info = this._DBContext.Data.Where(o => 
+                    o.Status == request.Status
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                ).ToList().Skip((pg-1) * lim).Take(lim);;
+                var amount = info.Count();
+                // count how many pages
+                var n =this._DBContext.Data.Where(o => 
+                    o.Status == request.Status
+                ).Count();
+                double k  = Math.Ceiling((double)n/lim);
+
+                var retInfo = new {
+                    pages = k,
+                    data = info
+                };
+                return Ok(retInfo);
+            }
+            else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
+                // filtered by company
+                var info = this._DBContext.Data.Where(o => 
+                    o.Company == request.Company
+                ).Select( x =>
+                    new {
+                        productNum = x.Productnum,
+                        productName = x.Productname,
+                        company = x.Company,
+                        approvalDate = x.Approvaldate,
+                        startDate = x.Startdate,
+                        endDate = x.Enddate,
+                        status = x.Status
+                    }
+                ).ToList().Skip((pg-1) * lim).Take(lim);;
+                var amount = info.Count();
+                // count how many pages
+                var n =this._DBContext.Data.Where(o => 
+                    o.Company == request.Company
+                ).Count();
+                double k  = Math.Ceiling((double)n/lim);
+
+                var retInfo = new {
+                    pages = k,
+                    data = info
+                };
+                return Ok(retInfo);
+            }
+            else{
+                var info = this._DBContext.Data.Select( x => new {
+                    productNum = x.Productnum,
+                    productName = x.Productname,
+                    company = x.Company,
+                    approvalDate = x.Approvaldate,
+                    startDate = x.Startdate,
+                    endDate = x.Enddate,
+                    status = x.Status
+                }).ToList().Skip((pg-1) * lim).Take(lim);
+                var amount = info.Count();
+                // count how many pages
+                var n =this._DBContext.Data.Count();
+                double k  = Math.Ceiling((double)n/lim);
+
+                var retInfo = new {
+                    pages = k,
+                    data = info
+                };
+                return Ok(retInfo);
+            }
+        }  
 
         [HttpDelete("Remove/{productNum}")]
         public IActionResult Remove(string productNum)
@@ -111,87 +227,42 @@ namespace backend.Controllers
             return CreatedAtAction("GetAll", info.Productnum, info);
         }
 
-        [HttpPost("Search")]
-        public IActionResult Search([FromQuery] SearchObj request)
-        {
-            if (request.SearchBar != null && request.SearchBar.Length != 0){
-                //search bar
-                var info = this._DBContext.Data.Where(o => 
-                    o.Productnum == request.SearchBar || o.Productname == request.SearchBar
-                ).Select( x =>
-                    new {
-                        productNum = x.Productnum,
-                        productName = x.Productname,
-                        company = x.Company,
-                        approvalDate = x.Approvaldate,
-                        startDate = x.Startdate,
-                        endDate = x.Enddate,
-                        status = x.Status
-                    }
-                );
-                return Ok(info);
-            }
-            else if(request.Company != null && request.Company.Length != 0 && request.Status != null && request.Status.Length != 0){
-                // filtered by company and status
-                var info = this._DBContext.Data.Where(o => 
-                    o.Company == request.Company && o.Status == request.Status
-                ).Select( x =>
-                    new {
-                        productNum = x.Productnum,
-                        productName = x.Productname,
-                        company = x.Company,
-                        approvalDate = x.Approvaldate,
-                        startDate = x.Startdate,
-                        endDate = x.Enddate,
-                        status = x.Status
-                    }
-                );
-                return Ok(info);
-            }
-            else if (request.Company == null && request.Status != null){
-                // filtered only by status
-                var info = this._DBContext.Data.Where(o => 
-                    o.Status == request.Status
-                ).Select( x =>
-                    new {
-                        productNum = x.Productnum,
-                        productName = x.Productname,
-                        company = x.Company,
-                        approvalDate = x.Approvaldate,
-                        startDate = x.Startdate,
-                        endDate = x.Enddate,
-                        status = x.Status
-                    }
-                );
-                return Ok(info);
-            }
-            else if(request.Company != null && request.Status == null){
-                // filtered by company
-                var info = this._DBContext.Data.Where(o => 
-                    o.Company == request.Company
-                ).Select( x =>
-                    new {
-                        productNum = x.Productnum,
-                        productName = x.Productname,
-                        company = x.Company,
-                        approvalDate = x.Approvaldate,
-                        startDate = x.Startdate,
-                        endDate = x.Enddate,
-                        status = x.Status
-                    }
-                );
-                return Ok(info);
-            }
-            else{
-                return Ok(false);
-            }
-        }        
+        // [HttpGet("GetList")]
+        // public IActionResult GetList(string limit, string page)
+        // {
+        //     var lim = int.Parse(limit);
+        //     var pg = int.Parse(page);
+        //     var info = this._DBContext.Data.Select( x => new {
+        //         productNum = x.Productnum,
+        //         productName = x.Productname,
+        //         company = x.Company,
+        //         approvalDate = x.Approvaldate,
+        //         startDate = x.Startdate,
+        //         endDate = x.Enddate,
+        //         status = x.Status
+        //     }).ToList().Skip((pg-1) * lim).Take(lim);
+
+        //     HttpContext.Session.SetString("dataPerPpage", lim.ToString());
+
+
+        //     var amount = info.Count();
+
+        //     // count how many pages
+        //     var n =this._DBContext.Data.Count();
+        //     double k  = Math.Ceiling((double)n/lim);
+
+        //     var retInfo = new {
+        //         pages = k,
+        //         data = info
+        //     };
+        //     return Ok(retInfo);
+        // }
     }
 
     public class SearchObj
     {
         public string ?Company { get; set; }
         public string ?Status { get; set; }
-        public string ?SearchBar { get; set; }
+        public string ?SearchBox { get; set; }
     }
 } 

@@ -23,6 +23,9 @@ builder.Services.AddDbContext<postgresContext>(options =>{
     options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
 });
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 
 var app = builder.Build();
 
@@ -38,6 +41,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseSession();
+app.Use(async (context, next) =>
+{
+    context.Session.SetString("dataPerPpage","dataPerPageValue");
+    await next.Invoke();
+});
 
 app.UseCors("CorsPolicy");
 
