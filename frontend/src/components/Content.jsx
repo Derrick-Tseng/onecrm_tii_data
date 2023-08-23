@@ -40,8 +40,9 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect="all"
     if(statusSelect === null){
         statusSelect = "all";
     }
+    
 
-    if(searchbox !== null){
+    if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
         await apiGetInfoListSearchbox(limit, page, searchbox)
         .then(res=>{
             setInfoList(res.data.data);
