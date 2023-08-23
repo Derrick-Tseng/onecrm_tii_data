@@ -1,4 +1,5 @@
 import '../css/Header.css';
+
 import React, {useState} from "react";
 
 function DropDownCompany({placeholder, companyList, setCompanySelect, companySelect}){
@@ -104,6 +105,7 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
         		<DropDownStatus placeholder="販售狀態" statusList={statusList} setSatusSelect={setStatusSelect}/>
 				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input' onChange={handleSearchBoxChange}></input>
       		</div>
+			
 			  <div className="Rectangle-825">
                 <GetFilterBtn companyList={companySelect} status={statusSelect} setCompanySelect={setCompanySelect} setStatusSelect={setStatusSelect} />
             </div>

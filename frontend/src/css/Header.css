@@ -47,14 +47,14 @@ table {
 } 
  
  .Rectangle-2763 {
-	width: 1920px;
+	width: 100%;
   	height: 20px;
 	background-color: #07304e;
   } 
  
  .Rectangle-2883 {
-    width: 1920px;
-    height: 6.46%;
+    width: 100%;
+    height:10%;
     /* padding: 10px 10px 10px 10px; */
     background-color: #f5f5f5;
     flex-direction: row;
@@ -99,7 +99,8 @@ table {
   } */
 
   .header-select, .header-input{
-	width: 11.458%;
+	/* flex: 1; */
+	width: 13.458%;
 	height: 65.3%;
 	margin: 20px 20px 20px 20px;
 	padding: 12px 16px 12px 16px;
@@ -107,3 +108,22 @@ table {
 	border: solid 1px #bcbcbc;
 	background-color: #fff;
   }
+
+  .button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* 藍色 */
+  color: #fff; /* 白色文字 */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #0056b3; /* 較深的藍色 */
+  }
+  
+  
