@@ -108,6 +108,7 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
 			
 			  <div className="Rectangle-825">
                 <GetFilterBtn companyList={companySelect} status={statusSelect} setCompanySelect={setCompanySelect} setStatusSelect={setStatusSelect} />
+
             </div>
     	</div>
   	);
