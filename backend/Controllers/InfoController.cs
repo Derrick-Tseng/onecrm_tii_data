@@ -55,6 +55,7 @@ namespace backend.Controllers
                     productName = x.Productname,
                     company = x.Company,
                     approvalDate = x.Approvaldate,
+                    approvalNum = x.Approvalnum,
                     startDate = x.Startdate,
                     endDate = x.Enddate,
                     status = x.Status
