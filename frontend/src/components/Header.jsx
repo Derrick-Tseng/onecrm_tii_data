@@ -1,6 +1,6 @@
 import '../css/Header.css';
 
-import React, {useState} from "react";
+import React from "react";
 
 function DropDownCompany({placeholder, companyList, setCompanySelect, companySelect}){
 	const listItem = companyList.map(item => 
