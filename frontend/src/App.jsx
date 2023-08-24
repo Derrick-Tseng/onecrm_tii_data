@@ -4,9 +4,9 @@ import Content from './components/Content';
 import { useState } from 'react';
 
 function App() {
-  const [companySelect, setCompanySelect] = useState([]);
+  const [companySelect, setCompanySelect] = useState(['all']);
   // const [companySelect, setCompanySelect] = useState(null);
-	const [statusSelect, setStatusSelect] = useState(null);
+	const [statusSelect, setStatusSelect] = useState("all");
   const [searchBox, SetSearchBox] = useState(null);
   return (
     <div className="App">

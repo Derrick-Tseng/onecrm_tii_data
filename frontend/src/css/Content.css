@@ -55,7 +55,23 @@ table {
     display: flex;
   }
 
-  .btn-filter {
+  .btn-filter-status {
+    /* 移除 width 屬性 */
+    height: 35px;
+    font-weight: 550;
+
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin: 0 10px 0 10px;
+    background-color: #69ace7;
+    display: flex;
+    border-width: 0px;
+    /* 新增 flex 屬性以及最小寬度 */
+    
+    min-width: 30px;
+  }
+
+  .btn-filter-company {
     /* 移除 width 屬性 */
     height: 35px;
     font-weight: 550;
@@ -80,10 +96,6 @@ table {
     display: flex;
 
   } */
-
-
-  
-  
   
   
   .shared-title-span-style {
@@ -106,7 +118,7 @@ table {
   .Rectangle-2870 {
     width: 90%;
     height: 58px;
-    margin: 5% 5% 0  10%;
+    margin: 5% 5% 0 5%;
     border-radius: 10px;
     background-color: #efefef;
     display: flex;
@@ -145,12 +157,12 @@ table {
 .Group-69612 {
   width: 90%;
   height: 78px;
-  padding: 0 0 0 0.7px;
+  /* padding: 0 0 0 0px; */
   border-style: solid;
   border-radius: 10px;
   border-collapse: collapse;
   border: 2px solid grey;  
-  margin: 3px 10% 0 10%;
+  margin: 3px 5% 0 5%;
   display: flex;
   /* align-items: center; 垂直置中 */
   justify-content: space-between; /* 左右對齊 */

@@ -43,10 +43,6 @@ function setModal(productNum, setModalContentId, setModalContent){
     .then(res =>{
         const item = res.data[0];
         setModalContent(
-
-
-
-                
             <>
                <table className="styled-table">
             <tbody>
@@ -156,7 +152,6 @@ function RenderItems({info}){
 
 function TitleBox(){
     return (
-        
         <div className="Rectangle-2870">
             {/* <input type="checkbox" className="cb1" id="cb_title"></input> */}
             <span className='shared-title-span-style span1'>壽險公司</span>

@@ -53,11 +53,11 @@ function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
     };
 
 	if (status != null){
-		listItem.push( <button className="btn-filter" value={status} key={status} onClick={handleClickStatus}>{status}</button>)
+		listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>{status}</button>)
 	}
 
 	if(companyList.length){
-		listItem.push( <button className="btn-filter" value={companyList[0]} key={companyList[0]} onClick={handleClickCompany}>{companyList[0]}</button>)
+		listItem.push( <button className="btn-filter-company" value={companyList[0]} key={companyList[0]} onClick={handleClickCompany}>{companyList[0]}</button>)
 	}
 
 	// for (let i=0; i<companyList.length; i++){
