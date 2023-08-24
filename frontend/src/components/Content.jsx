@@ -2,7 +2,40 @@ import '../css/Content.css';
 import Popup from './Popup';
 import React, {useState} from "react";
 import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox } from "../api/agent.js";
-
+<div class="container">
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Job Id</div>
+      <div class="col col-2">Customer Name</div>
+      <div class="col col-3">Amount Due</div>
+      <div class="col col-4">Payment Status</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Job Id">42235</div>
+      <div class="col col-2" data-label="Customer Name">John Doe</div>
+      <div class="col col-3" data-label="Amount">$350</div>
+      <div class="col col-4" data-label="Payment Status">Pending</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Job Id">42442</div>
+      <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
+      <div class="col col-3" data-label="Amount">$220</div>
+      <div class="col col-4" data-label="Payment Status">Pending</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Job Id">42257</div>
+      <div class="col col-2" data-label="Customer Name">John Smith</div>
+      <div class="col col-3" data-label="Amount">$341</div>
+      <div class="col col-4" data-label="Payment Status">Pending</div>
+    </li>
+    <li class="table-row">
+      <div class="col col-1" data-label="Job Id">42311</div>
+      <div class="col col-2" data-label="Customer Name">John Carpenter</div>
+      <div class="col col-3" data-label="Amount">$115</div>
+      <div class="col col-4" data-label="Payment Status">Pending</div>
+    </li>
+  </ul>
+</div>
 
 function setModal(productNum, setModalContentId, setModalContent){
     setModalContentId(productNum);
@@ -10,15 +43,47 @@ function setModal(productNum, setModalContentId, setModalContent){
     .then(res =>{
         const item = res.data[0];
         setModalContent(
+
+
+
+                
             <>
-                <div>產品編號：{item.productNum}</div>
-                <div>產品名稱：{item.productName}</div>
-                <div>產品狀態：{item.status}</div>
-                <div>發行公司：{item.company}</div>
-                <div>核准編號：{item.approvalNum}</div>
-                <div>核准日期：{item.approvalDate}</div>
-                <div>起售日：{item.startDate}</div>
-                <div>停售日：{item.endDate}</div>
+               <table className="styled-table">
+            <tbody>
+              <tr>
+                <td>產品編號：</td>
+                <td>{item.productNum}</td>
+              </tr>
+              <tr>
+                <td>產品名稱：</td>
+                <td>{item.productName}</td>
+              </tr>
+              <tr>
+                <td>產品狀態：</td>
+                <td>{item.status}</td>
+              </tr>
+              <tr>
+                <td>發行公司：</td>
+                <td>{item.company}</td>
+              </tr>
+              <tr>
+                <td>核准編號：</td>
+                <td>{item.approvalNum}</td>
+              </tr>
+              <tr>
+                <td>核准日期：</td>
+                <td>{item.approvalDate}</td>
+              </tr>
+              <tr>
+                <td>起售日：</td>
+                <td>{item.startDate}</td>
+              </tr>
+              <tr>
+                <td>停售日：</td>
+                <td>{item.endDate}</td>
+              </tr>
+            </tbody>
+          </table>
             </>
         );
     })

@@ -1,4 +1,4 @@
-
+import '../css/Table.css'
 import blobToBase64 from '../helper.js'
 import { apiGetAll, apiGetInfoList,apiGetInfoById, apiGetProductContentPdf, apiGetTreatyPdf, apiGetRatePdf } from './agent';
 
@@ -24,33 +24,59 @@ export function getList(limit, page){
 }
 
 
-export function getProductInfo(productNum, setModalContent){
+export function getProductInfo(productNum, setModalContent) {
     apiGetInfoById(productNum)
-    .then(res =>{
+      .then((res) => {
         const item = res.data[0];
         setModalContent(
-            <>
-                <div>產品編號：{item.productNum}</div>
-                <div>產品名稱：{item.productName}</div>
-                <div>產品狀態：{item.status}</div>
-                <div>發行公司：{item.company}</div>
-                <div>核准編號：{item.approvalNum}</div>
-                <div>核准日期：{item.approvalDate}</div>
-                <div>起售日：{item.startDate}</div>
-                <div>停售日：{item.endDate}</div>
-            </>
+          <table className="styled-table">
+            <tbody>
+              <tr>
+                <td>產品編號：</td>
+                <td>{item.productNum}</td>
+              </tr>
+              <tr>
+                <td>產品名稱：</td>
+                <td>{item.productName}</td>
+              </tr>
+              <tr>
+                <td>產品狀態：</td>
+                <td>{item.status}</td>
+              </tr>
+              <tr>
+                <td>發行公司：</td>
+                <td>{item.company}</td>
+              </tr>
+              <tr>
+                <td>核准編號：</td>
+                <td>{item.approvalNum}</td>
+              </tr>
+              <tr>
+                <td>核准日期：</td>
+                <td>{item.approvalDate}</td>
+              </tr>
+              <tr>
+                <td>起售日：</td>
+                <td>{item.startDate}</td>
+              </tr>
+              <tr>
+                <td>停售日：</td>
+                <td>{item.endDate}</td>
+              </tr>
+            </tbody>
+          </table>
         );
-    })
-    .catch(err=> {
+      })
+      .catch((err) => {
         setModalContent(
-            <>
-                <div>Data Not Found</div>
-            </>
+          <>
+            <div>Data Not Found</div>
+          </>
         );
         console.log(err);
-    })
-}
-
+      });
+  }
+  
 
 export function getProductContentPdf(productNum, setModalContent){
     apiGetProductContentPdf(productNum)
