@@ -101,8 +101,9 @@ namespace backend.Controllers
             }
             else if(request.Company != "all" && request.Company != null && request.Company.Length != 0 && request.Status != "all" && request.Status != null && request.Status.Length != 0){
                 // filtered by company and status
+                
                 var info = this._DBContext.Data.Where(o => 
-                    o.Company == request.Company && o.Status == request.Status
+                    request.Company.Contains(o.Company) && o.Status == request.Status
                 ).Select( x =>
                     new {
                         productNum = x.Productnum,
@@ -157,8 +158,10 @@ namespace backend.Controllers
             }
             else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
                 // filtered by company
+                Console.WriteLine("+=+=+=" + request.Company);
                 var info = this._DBContext.Data.Where(o => 
-                    o.Company == request.Company
+                    request.Company.Contains(o.Company)
+                    // o.Company == request.Company
                 ).Select( x =>
                     new {
                         productNum = x.Productnum,

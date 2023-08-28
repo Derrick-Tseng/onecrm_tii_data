@@ -10,10 +10,6 @@ function setModal(productNum, setModalContentId, setModalContent){
     .then(res =>{
         const item = res.data[0];
         setModalContent(
-
-
-
-                
             <>
                <table className="styled-table">
             <tbody>
@@ -64,7 +60,43 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-async function getList(setInfoList, limit, page, setPageNum, companySelect="all", statusSelect="all", searchbox=""){
+// async function getList(setInfoList, limit, page, setPageNum, companySelect="all", statusSelect="all", searchbox=""){
+    
+//     if(companySelect === null){
+//         companySelect = "all";
+//     }
+//     if(statusSelect === null){
+//         statusSelect = "all";
+//     }
+    
+
+//     if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
+//         await apiGetInfoListSearchbox(limit, page, searchbox)
+//         .then(res=>{
+//             setInfoList(res.data.data);
+//             setPageNum(res.data.pages);
+//             return 
+//         })
+//         .catch(err=>{
+//             console.log(err)
+//             return 
+//         })
+//     }
+//     else{
+//         await apiGetInfoList(limit, page, companySelect, statusSelect)
+//         .then(res=>{
+//             setInfoList(res.data.data);
+//             setPageNum(res.data.pages);
+//             return 
+//         })
+//         .catch(err=>{
+//             console.log(err)
+//             return 
+//         })
+//     }
+// }
+
+async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
     
     if(companySelect === null){
         companySelect = "all";
@@ -87,6 +119,8 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect="all"
         })
     }
     else{
+        console.log(companySelect)
+        // const tmpSelect = companySelect
         await apiGetInfoList(limit, page, companySelect, statusSelect)
         .then(res=>{
             setInfoList(res.data.data);

@@ -8,11 +8,18 @@ function DropDownCompany({placeholder, companyList, setCompanySelect, companySel
   	);
 
 	const handleChange = (e) => {
-		// var tmp = [...companySelect];
-		var tmp = []
-		tmp.push(e.target.value);
-		setCompanySelect(tmp)
-		// setCompanySelect(e.target.value)
+		if (e.target.value === "all"){
+			var tmp = ["all"]
+			setCompanySelect(tmp)
+		}
+		else{
+			var tmp = [...companySelect];
+			// var tmp = []
+			tmp.push(e.target.value);
+			setCompanySelect(tmp)
+			// setCompanySelect(e.target.value)
+		}
+		
     };
 
   	return (
@@ -41,8 +48,10 @@ function DropDownStatus({placeholder, statusList, setSatusSelect}){
 }
 
 function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
-	// const tmpSet = new Set();
+	const tmpSet = new Set();
 	const listItem = []
+	console.log(companyList)
+	console.log("+", status)
 
 	const handleClickCompany = (e) => {
         setCompanySelect(companyList.filter(val => val !== e.target.value));
@@ -52,20 +61,32 @@ function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
         setStatusSelect(null);
     };
 
+	// if(){
+	// 	listItem
+	// }
+
 	if (status != null){
 		listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>{status}</button>)
 	}
 
-	if(companyList.length){
-		listItem.push( <button className="btn-filter-company" value={companyList[0]} key={companyList[0]} onClick={handleClickCompany}>{companyList[0]}</button>)
+	// console.log("=", listItem)
+
+	// if(companyList.length){
+	// 	listItem.push( <button className="btn-filter-company" value={companyList[0]} key={companyList[0]} onClick={handleClickCompany}>{companyList[0]}</button>)
+	// }
+	// console.log(companyList);
+
+	if(companyList.length > 1 && companyList.includes("all")){
+		setCompanySelect(companyList.filter(val => val !== "all"));
 	}
 
-	// for (let i=0; i<companyList.length; i++){
-	// 	if(!tmpSet.has(companyList[i])){
-	// 		listItem.push( <button className="btn-filter" value={companyList[i]} key={companyList[i]} onClick={handleClickCompany}>{companyList[i]}</button>)
-	// 		tmpSet.add(companyList[i]);
-	// 	}
-	// }
+	for (let i=0; i<companyList.length; i++){
+		if(!tmpSet.has(companyList[i])){
+			listItem.push( <button className="btn-filter-company" value={companyList[i]} key={companyList[i]} onClick={handleClickCompany}>{companyList[i]}</button>)
+			tmpSet.add(companyList[i]);
+		}
+	}
+	console.log("=", listItem)
   	return (
         <>
             {listItem}
