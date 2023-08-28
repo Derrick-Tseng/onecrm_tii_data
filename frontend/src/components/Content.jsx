@@ -236,7 +236,7 @@ function Content({companySelect, statusSelect, searchBox}) {
 
     return (
     	<div className="Content">
-            <button onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
+            <button className='button-submit' onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
             <TitleBox/>
             <RenderItems info={infoList}/>
             <div className="Rectangle-3019">
@@ -244,7 +244,7 @@ function Content({companySelect, statusSelect, searchBox}) {
                     <div className="Group-69454">
                         <span className='span5'>一頁最多顯示</span>
                         <FooterPageLimitSelect dataList={pagesLimitSelect} setTodosPerPage={setTodosPerPage} setInfoList={setInfoList} setPageNum={setPageNum} todosPerPage={todosPerPage} setCurrentPage={setCurrentPage}  companySelect={companySelect} statusSelect={statusSelect} searchBox={searchBox} />
-                        <span className='span5_2'>Page Select</span>
+                        <span className='span5_2'>頁數選擇</span>
                         <FooterPageSelect dataList={pagesSelect} setCurrentPage={setCurrentPage} setInfoList={setInfoList} limit={todosPerPage}  setPageNum={setPageNum} currentPage={currentPage} companySelect={companySelect} statusSelect={statusSelect} searchBox={searchBox}/>
                         
                         <span className="span6">共 {pageNum} 頁</span>
@@ -255,11 +255,11 @@ function Content({companySelect, statusSelect, searchBox}) {
                         <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
                     </div> */}
                 </div>
-                    <div className="Group-69455">
-                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage,  companySelect, statusSelect, searchBox)}>上一頁</button>
-                        <span className='span7'>{currentPage}</span>
-                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage, companySelect, statusSelect, searchBox)}>下一頁</button>
-                    </div>
+                <div className="Group-69455">
+                    <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage,  companySelect, statusSelect, searchBox)}>上一頁</button>
+                    <span className='span7'>{currentPage}</span>
+                    <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage, companySelect, statusSelect, searchBox)}>下一頁</button>
+                </div>
             </div>
     	</div>
   	);

@@ -360,15 +360,16 @@ table {
   }
 
   .Rectangle-3019 {
-    width: 100%;
-    height: 65px;
-    margin: 1px 0 0;
-    padding: 14px 40px 14px 535px;
-    border-radius: 14px;
+    width: 90%;
+    height: 78px;
+    margin: 3px 5% 0 5%;
+    padding-left: 25%;
+    /* display: flex; */
+    justify-content: space-between; /* 左右對齊 */
   }
 
   .Group-69595 {
-    width: 80%;
+    width: 100%;
     height: 37px;
     margin: 0 0 0 -10%;
     display: flex;
@@ -383,14 +384,14 @@ table {
   }
 
   .Group-69455 {
-    width: 20%;
+    width: 50%;
     height: 37px;
     margin: 0 0 0 10%;
     display: flex;
   }
 
   .span5 {
-    width: 60%;
+    width: 20%;
     height: 37px;
     margin: 5px 0px 5px 5px;
     font-family: PingFangTC;
@@ -404,7 +405,7 @@ table {
     color: #100f0d;
   }
   .span5_2 {
-    width: 50%;
+    width: 20%;
     height: 37px;
     margin: 5px 0px 5px 5px;
     font-family: PingFangTC;
@@ -419,9 +420,9 @@ table {
   }
 
   .span6 {
-    width: 40%;
+    width: 20%;
     height: 37px;
-    margin: 5px 10px 5px 20px;
+    margin: 5px 0 5px 5px;
     font-family: PingFangTC;
     font-size: 16px;
     font-weight: normal;
@@ -435,7 +436,7 @@ table {
   }
 
   .btn-left {
-    width: 90%;
+    width: 25%;
     height: 24px;
     margin: 5px 5px 5px 0;
     background-color: white;
@@ -445,7 +446,7 @@ table {
   }
 
   .btn-right {
-    width: 90%;
+    width: 25%;
     height: 24px;
     margin: 5px 0 5px 5px;
     background-color: white;
@@ -471,7 +472,7 @@ table {
   }
 
   .footer-select{
-    width: 20%;
+    width: 10%;
 	  height: 65.3%;
 	  margin: 5px 5px 5px 0px;
 	  /* padding: 12px 16px 12px 16px; */
@@ -485,14 +486,14 @@ table {
     border-radius: 14px;
   }
 
-  .button {
+  .button-submit {
     display: inline-block;
     padding: 10px 15px;
     font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 5px;
-    background-color: #007bff; /* 藍色 */
+    background-color: #f07e26; /* 藍色 */
   color: #fff; /* 白色文字 */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
