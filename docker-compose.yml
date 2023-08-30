@@ -1,31 +1,53 @@
-version: '3.6'
+version: "3"
 
 services:
-
-  postgres:
-    image: postgres:15.1
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=psg1234
+  backend:
+    container_name: onecrm_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - 5050:5050
+    depends_on:
+      - db
+    network_mode: "host"
+    # networks:
+    #   - onecrm-network 
+      
+    
+  frontend:
+    container_name: onecrm_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    network_mode: "host"
+    # networks:
+    #   - onecrm-network  
+
+  db:
+    image: postgres:15.1
+    container_name: onecrm_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data/
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    # networks:
+    #   - onecrm-network  
+    network_mode: "host"
+    restart: always
 volumes:
-  postgres-data:
-
-#  create table data
-# (
-#     productNum varchar(30) PRIMARY KEY,
-#     productName varchar(30),
-#     approvalDate varchar(15),
-#     startDate varchar(15),
-#     endDate varchar(15),
-#     approvalNum varchar(30),
-#     company varchar(30),
-#     productContent bytea[],
-#     treaty bytea[],
-#     rate bytea[]
-# );
+  pgdata:
+  
+# networks:
+#   onecrm-network:
+#     driver: bridge
+#     name: onecrm-network

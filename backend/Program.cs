@@ -42,13 +42,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseSession();
-app.Use(async (context, next) =>
-{
-    context.Session.SetString("dataPerPpage","dataPerPageValue");
-    await next.Invoke();
-});
-
 app.UseCors("CorsPolicy");
 
 app.Run();
