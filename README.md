@@ -7,7 +7,7 @@
 3. python3 seeding.py
 
 - To stop:
-docker compose down --volumes
+1. docker compose down --volumes
 
 ### Method 2.
 - To run: 
