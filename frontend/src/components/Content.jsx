@@ -221,7 +221,7 @@ function Content({companySelect, statusSelect, searchBox}) {
     const [infoList, setInfoList] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [todosPerPage, setTodosPerPage] = useState(2);
+    const [todosPerPage, setTodosPerPage] = useState(4);
     const [pageNum, setPageNum] = useState(0);
 
     var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
