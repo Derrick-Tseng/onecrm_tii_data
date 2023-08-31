@@ -7,9 +7,6 @@ def convert_To_Binary(filename):
         data = file.read()
     return data
 
-
-
-
 def insert_data(data):
     conn = None
     

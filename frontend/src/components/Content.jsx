@@ -221,14 +221,14 @@ function Content({companySelect, statusSelect, searchBox}) {
     const [infoList, setInfoList] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [todosPerPage, setTodosPerPage] = useState(4);
+    const [todosPerPage, setTodosPerPage] = useState(10);
     const [pageNum, setPageNum] = useState(0);
 
     var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
     var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
 
     const pagesSelect = []
-    const pagesLimitSelect = [1, 2, 3, 4]
+    const pagesLimitSelect = [10, 20, 30, 40, 50]
 
     for(let i=1; i<=pageNum; i++){
         pagesSelect.push(i);
