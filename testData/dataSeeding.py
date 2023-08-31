@@ -52,7 +52,7 @@ def insert_data(data):
 
         cur.execute("INSERT INTO data(productNum, productName, approvalDate, startDate, endDate, approvalNum, company, productContent, treaty, rate, status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                     (productnum, productname, approvaldate,startdate,enddate,approvalnum, company, productcontent, treaty, rate, status))
-        
+
         cur.close()
         
     except(Exception, psycopg2.DatabaseError) as error:

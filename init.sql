@@ -1,12 +1,12 @@
 create table data
 (
     productNum varchar(30) PRIMARY KEY,
-    productName varchar(30),
-    approvalDate varchar(15),
-    startDate varchar(15),
-    endDate varchar(15),
-    approvalNum varchar(30),
-    company varchar(30),
+    productName varchar(50),
+    approvalDate varchar(20),
+    startDate varchar(20),
+    endDate varchar(20),
+    approvalNum varchar(80),
+    company varchar(50),
     status varchar(10),
     productContent bytea[],
     treaty bytea[],
