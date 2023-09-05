@@ -158,7 +158,6 @@ namespace backend.Controllers
             }
             else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
                 // filtered by company
-                Console.WriteLine("+=+=+=" + request.Company);
                 var info = this._DBContext.Data.Where(o => 
                     request.Company.Contains(o.Company)
                     // o.Company == request.Company
@@ -230,37 +229,6 @@ namespace backend.Controllers
             // return Ok(true);
             return CreatedAtAction("GetAll", info.Productnum, info);
         }
-
-        // [HttpGet("GetList")]
-        // public IActionResult GetList(string limit, string page)
-        // {
-        //     var lim = int.Parse(limit);
-        //     var pg = int.Parse(page);
-        //     var info = this._DBContext.Data.Select( x => new {
-        //         productNum = x.Productnum,
-        //         productName = x.Productname,
-        //         company = x.Company,
-        //         approvalDate = x.Approvaldate,
-        //         startDate = x.Startdate,
-        //         endDate = x.Enddate,
-        //         status = x.Status
-        //     }).ToList().Skip((pg-1) * lim).Take(lim);
-
-        //     HttpContext.Session.SetString("dataPerPpage", lim.ToString());
-
-
-        //     var amount = info.Count();
-
-        //     // count how many pages
-        //     var n =this._DBContext.Data.Count();
-        //     double k  = Math.Ceiling((double)n/lim);
-
-        //     var retInfo = new {
-        //         pages = k,
-        //         data = info
-        //     };
-        //     return Ok(retInfo);
-        // }
     }
 
     public class SearchObj

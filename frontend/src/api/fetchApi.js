@@ -5,7 +5,6 @@ import { apiGetAll, apiGetInfoList,apiGetInfoById, apiGetProductContentPdf, apiG
 export function getAll(){
     apiGetAll()
     .then(res=>{
-        // console.log(JSON.stringify(res.data));
         return res;
     })
     .catch(err=>{
@@ -99,21 +98,6 @@ export function getProductContentPdf(productNum, setModalContent){
         );
         console.log(err);
     });
-
-    // apiGetProductContentPdf(productNum)
-    // .then(res =>{
-    //     const item = res.data[0].pdf[0];
-    //     var arrayBuffer =  new Int16Array(item); 
-    //     const url = URL.createObjectURL(new Blob([arrayBuffer], {type: "application/pdf"}))
-    //     setModalContent(
-    //         <>
-    //             <iframe width='100%' height='100%' src={url}></iframe>
-    //         </>
-    //     );
-    // })
-    // .catch(err=> {
-    //     console.log(err);
-    // });
 }
 
 

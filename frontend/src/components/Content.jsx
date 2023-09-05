@@ -60,42 +60,6 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
-// async function getList(setInfoList, limit, page, setPageNum, companySelect="all", statusSelect="all", searchbox=""){
-    
-//     if(companySelect === null){
-//         companySelect = "all";
-//     }
-//     if(statusSelect === null){
-//         statusSelect = "all";
-//     }
-    
-
-//     if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
-//         await apiGetInfoListSearchbox(limit, page, searchbox)
-//         .then(res=>{
-//             setInfoList(res.data.data);
-//             setPageNum(res.data.pages);
-//             return 
-//         })
-//         .catch(err=>{
-//             console.log(err)
-//             return 
-//         })
-//     }
-//     else{
-//         await apiGetInfoList(limit, page, companySelect, statusSelect)
-//         .then(res=>{
-//             setInfoList(res.data.data);
-//             setPageNum(res.data.pages);
-//             return 
-//         })
-//         .catch(err=>{
-//             console.log(err)
-//             return 
-//         })
-//     }
-// }
-
 async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
     
     if(companySelect === null){
@@ -119,7 +83,6 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect, stat
         })
     }
     else{
-        console.log(companySelect)
         // const tmpSelect = companySelect
         await apiGetInfoList(limit, page, companySelect, statusSelect)
         .then(res=>{
