@@ -1,6 +1,6 @@
 import '../css/Content.css';
 import Popup from './Popup';
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox } from "../api/agent.js";
 
 
@@ -233,6 +233,15 @@ function Content({companySelect, statusSelect, searchBox}) {
     for(let i=1; i<=pageNum; i++){
         pagesSelect.push(i);
     }
+
+    useEffect(() => {
+        getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
+     }, []);
+
+    useEffect(() => {
+        getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
+    }, [companySelect])
+     
 
     return (
     	<div className="Content">
