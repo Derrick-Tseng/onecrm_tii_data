@@ -29,7 +29,7 @@ function Popup({productNum, content, setModalContent}) {
                             {content}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" onClick={()=>setModalContent(null)} className="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                            <button type="button" onClick={()=>setModalContent(null)} className="btn btn-danger" data-bs-dismiss="modal">關閉</button>
                         </div>
                     </div>
                 </div>

@@ -141,12 +141,14 @@ function RenderItems({info}){
     const itemList = info.map(item => 
         
         <div className="Group-69612" key={item.productNum}>
-            <input type="checkbox" className="cb2" id="cb" name={item.productNum}></input>
+            {/* <input type="checkbox" className="cb2" id="cb" name={item.productNum}></input> */}
             <span className='shared-span-style span1'>{item.company}</span>
             <span className='shared-span-style DCB'>{item.productNum}</span>
             <span className='shared-span-style span2'>{item.productName}</span>
+            <span className='shared-span-style span2'>{item.endDate}</span>
+
             {/* <span className='span3'>{item.status}</span> */}
-            <button type="button" onClick={()=>setModal(item.productNum, setModalContentId, setModalContent)} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">查看</button>
+            <button type="button" onClick={()=>setModal(item.productNum, setModalContentId, setModalContent)} className='button-check ' data-bs-toggle="modal" data-bs-target="#exampleModal">查看</button>
             <Popup productNum={modalContentId} content={modalContent} setModalContent={setModalContent}/>
         </div>
     );
@@ -162,6 +164,7 @@ function TitleBox(){
             <span className='shared-title-span-style span1'>壽險公司</span>
             <span className='shared-title-span-style DCB'>代碼</span>
             <span className='shared-title-span-style span2'>產品名稱</span>
+            <span className='shared-title-span-style '>停售時間</span>
             {/* <span className='titile_span3'></span> */}
             {/* <button className='titile_btn'>查看</button> */}
         </div>

@@ -4,7 +4,7 @@ cd ..
 cd frontend
 sudo docker build -t frontend-test .
 cd ..
-sudo docker compose up
+sudo docker compose up -d
 echo Start Seeding Test Data
 sleep 2
 cd testData
