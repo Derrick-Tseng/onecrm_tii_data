@@ -86,17 +86,6 @@ table {
     
     min-width: 30px;
   }
-
-  /* .Rectangle-2870 {
-    width: 1100px;
-    height: 58px;
-    margin: 3px 10% 0 10%;
-    border-radius: 10px;
-    background-color: #efefef;
-    display: flex;
-
-  } */
-  
   
   .shared-title-span-style {
     flex: 1;
@@ -124,18 +113,6 @@ table {
     align-items: center; /* 垂直置中 */
   }
   
-  /* .Group-69612 {
-    width: 1100px;
-    height: 78px;
-    padding: 0 0 0 0.7px;
-    border-style:solid;
-    border-radius: 10px;
-    border-collapse:collapse;
-    border:1px solid grey;  
-    margin:3px 10% 0 10%;
-    display: flex;
-    
-  } */
   .shared-span-style {
   width: 33.33%; /* 將寬度均分為三份 */
   height: 22px;
@@ -200,58 +177,6 @@ table {
     object-fit: contain;
   }
 
-  /* .titile_span1{
-    width: 140px;
-    height: 22px;
-    margin: 20px 20px 18px 50px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #00254a;
-    border:1px solid grey;  
-    display: flex;
-    align-items: center;
-  }
-
-  .titile_DCB {
-    width: 100px;
-    height: 22px;
-    margin: 20px 16px 18px 50px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #00254a;
-    border:1px solid grey;  
-    display: inline;
-  }
-
-  .title_span2 {
-    width: 80px;
-    height: 22px;
-    margin: 20px 214px 18px 50px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #00254a;
-    border:1px solid grey;  
-    display: inline;
-  } */
-
   .titile_span3 {
     width: 90px;
     height: 22px;
@@ -268,63 +193,7 @@ table {
     border:1px solid grey;  
     display: inline;
   }
-/* 
-  .span1 {
-    width: 400px;
-    height: 22px;
-    margin: 30px 20px 28px 35px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #00254a;
-    border:1px solid grey;  
-    display: inline;
-    white-space: nowrap;
-  }
-
-  .DCB {
-    width: 300px;
-    height: 22px;
-    margin: 30px 16px 28px 50px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #00254a;
-    border:1px solid grey;  
-    display: inline;
-    white-space: nowrap;
-
-  }
-
-  .span2 {
-    width: 550px;
-    height: 22px;
-    margin: 30px 214px 28px 50px;
-    font-family: PingFangTC;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #00254a;
-    border:1px solid grey;  
-    display: inline;
-    white-space: nowrap;
-
-  } */
-
+  
   .span3 {
     width: 90px;
     height: 22px;
@@ -403,6 +272,7 @@ table {
     text-align: center;
     color: #100f0d;
   }
+
   .span5_2 {
     width: 20%;
     height: 37px;
@@ -497,17 +367,11 @@ table {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
   }
+
   .button-submit:hover {
     background-color: #d35e10;
-
   }
   
-  /* .button:hover { */
-   /* background-color: #0056b3; */
-  /* }  */
-  
-
-
   .button-check  {
     background-color: #07304E;
     border: none;
@@ -521,5 +385,5 @@ table {
   .button-check:hover {
     background-color: #0056b3;
   }
-  /* 6DCA99 */
+
   

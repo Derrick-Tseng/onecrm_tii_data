@@ -4,8 +4,19 @@
     margin-top: px;
   }
   
-  .button-group button {
+  .button {
     background-color: #07304E;
+    
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .button-group  {
+    
+    margin: 0 0 0 35%;  
     border: none;
     border-radius: 5px;
     color: white;
