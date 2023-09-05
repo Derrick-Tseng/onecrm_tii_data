@@ -21,10 +21,10 @@ namespace backend.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("postgres://root:postgres@192.168.165.3:5432/postgres");
+                optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=root;Password=postgres;");
             }
         }
 
@@ -42,31 +42,31 @@ namespace backend.Models
                     .HasColumnName("productnum");
 
                 entity.Property(e => e.Approvaldate)
-                    .HasMaxLength(15)
+                    .HasMaxLength(20)
                     .HasColumnName("approvaldate");
 
                 entity.Property(e => e.Approvalnum)
-                    .HasMaxLength(30)
+                    .HasMaxLength(80)
                     .HasColumnName("approvalnum");
 
                 entity.Property(e => e.Company)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("company");
 
                 entity.Property(e => e.Enddate)
-                    .HasMaxLength(15)
+                    .HasMaxLength(20)
                     .HasColumnName("enddate");
 
                 entity.Property(e => e.Productcontent).HasColumnName("productcontent");
 
                 entity.Property(e => e.Productname)
-                    .HasMaxLength(30)
+                    .HasMaxLength(50)
                     .HasColumnName("productname");
 
                 entity.Property(e => e.Rate).HasColumnName("rate");
 
                 entity.Property(e => e.Startdate)
-                    .HasMaxLength(15)
+                    .HasMaxLength(20)
                     .HasColumnName("startdate");
 
                 entity.Property(e => e.Status)
