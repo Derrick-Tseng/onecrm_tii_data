@@ -1,9 +1,3 @@
-cd backend
-sudo docker build -t backend-test .
-cd ..
-cd frontend
-sudo docker build -t frontend-test .
-cd ..
 sudo docker compose up -d
 echo Start Seeding Test Data
 sleep 2
