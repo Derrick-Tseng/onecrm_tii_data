@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -44,8 +45,6 @@ namespace backend.Controllers
             return Ok(info);
         }
 
-        
-
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
         {
@@ -72,9 +71,10 @@ namespace backend.Controllers
             
             if (request.SearchBox != null && request.SearchBox.Length != 0){
                 //search bar
-                Console.WriteLine("1111");
                 var info = this._DBContext.Data.Where(o => 
-                    o.Productnum == request.SearchBox || o.Productname == request.SearchBox
+                    o.Productnum.Contains(request.SearchBox) 
+                    || (o.Productname!=null && o.Productname.Contains(request.SearchBox))
+                    || (o.Approvalnum!=null && o.Approvalnum.Contains(request.SearchBox))
                 ).Select( x =>
                     new {
                         productNum = x.Productnum,
@@ -90,7 +90,9 @@ namespace backend.Controllers
                 var amount = info.Count();
                 // count how many pages
                 var n =this._DBContext.Data.Where(o => 
-                    o.Productnum == request.SearchBox || o.Productname == request.SearchBox
+                    o.Productnum.Contains(request.SearchBox) 
+                    || (o.Productname!=null && o.Productname.Contains(request.SearchBox))
+                    || (o.Approvalnum!=null && o.Approvalnum.Contains(request.SearchBox))
                 ).Count();
                 double k  = Math.Ceiling((double)n/lim);
 
@@ -102,7 +104,6 @@ namespace backend.Controllers
             }
             else if(request.Company != "all" && request.Company != null && request.Company.Length != 0 && request.Status != "all" && request.Status != null && request.Status.Length != 0){
                 // filtered by company and status
-                Console.WriteLine("2222");
                 bool reqStatus = false;
                 if (request.Status == "selling"){
                     reqStatus = true;
@@ -111,7 +112,7 @@ namespace backend.Controllers
                     reqStatus = false;
                 }
                 var info = this._DBContext.Data.Where(o => 
-                    request.Company.Contains(o.Company) && o.Status == reqStatus
+                    o.Company == request.Company && o.Status == reqStatus
                 ).Select( x =>
                     new {
                         productNum = x.Productnum,
@@ -138,13 +139,11 @@ namespace backend.Controllers
             }
             else if (request.Company == "all" && request.Status != "all"  && request.Status != null && request.Status.Length != 0){
                 // filtered only by status
-                Console.WriteLine("3333");
                 bool reqStatus = false;
                 if (request.Status == "selling"){
                     reqStatus = true;
                 }
                 else{
-                    Console.WriteLine("++++++");
                     reqStatus = false;
                 }
                 var info = this._DBContext.Data.Where(o => 
@@ -175,9 +174,8 @@ namespace backend.Controllers
             }
             else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
                 // filtered by company
-                Console.WriteLine("4444");
                 var info = this._DBContext.Data.Where(o => 
-                    request.Company.Contains(o.Company)
+                    o.Company == request.Company
                     // o.Company == request.Company
                 ).Select( x =>
                     new {
@@ -204,7 +202,6 @@ namespace backend.Controllers
                 return Ok(retInfo);
             }
             else{
-                Console.WriteLine("5555");
                 var info = this._DBContext.Data.Select( x => new {
                     productNum = x.Productnum,
                     productName = x.Productname,
