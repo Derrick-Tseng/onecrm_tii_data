@@ -24,8 +24,6 @@ function Popup({productNum, content, setModalContent}) {
                             <button type="button" onClick={()=>setModalContent(null)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            
-                            
                             {content}
                         </div>
                         <div className="modal-footer">

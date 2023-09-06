@@ -1,6 +1,43 @@
 import '../css/Header.css';
-
+import { apiGetInfoList, apiGetInfoListSearchbox } from "../api/agent.js";
 import React from "react";
+
+async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
+    
+    if(companySelect === null){
+        companySelect = "all";
+    }
+    if(statusSelect === null){
+        statusSelect = "all";
+    }
+    
+
+    if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
+        await apiGetInfoListSearchbox(limit, page, searchbox)
+        .then(res=>{
+            setInfoList(res.data.data);
+            setPageNum(res.data.pages);
+            return 
+        })
+        .catch(err=>{
+            console.log(err)
+            return 
+        })
+    }
+    else{
+        // const tmpSelect = companySelect
+        await apiGetInfoList(limit, page, companySelect, statusSelect)
+        .then(res=>{
+            setInfoList(res.data.data);
+            setPageNum(res.data.pages);
+            return 
+        })
+        .catch(err=>{
+            console.log(err)
+            return 
+        })
+    }
+}
 
 function DropDownCompany({placeholder, companyList, setCompanySelect, companySelect}){
 	const listItem = companyList.map(item => 
@@ -82,7 +119,7 @@ function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
 }
 
 
-function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect, SetSearchBox}) {
+function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect, searchBox, SetSearchBox, infoList, setInfoList, todosPerPage, setTodosPerPage, pageNum, setPageNum}) {
 
 	const companyList = [
 		'all',
@@ -137,7 +174,8 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
         		<DropDownCompany placeholder="壽險公司" companyList={companyList} setCompanySelect={setCompanySelect} companySelect={companySelect} />
         		<DropDownStatus placeholder="販售狀態" statusList={statusList} setSatusSelect={setStatusSelect}/>
 				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input' onChange={handleSearchBoxChange}></input>
-      		</div>
+				<button className='button-submit' onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
+			</div>
 			
 			  <div className="Rectangle-825">
                 <GetFilterBtn companyList={companySelect} status={statusSelect} setCompanySelect={setCompanySelect} setStatusSelect={setStatusSelect} />

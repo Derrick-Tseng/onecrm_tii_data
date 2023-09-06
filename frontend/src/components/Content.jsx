@@ -183,12 +183,8 @@ function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit, companyS
 }
 
 
-function Content({companySelect, statusSelect, searchBox}) {
-    const [infoList, setInfoList] = useState([]);
-
+function Content({companySelect, statusSelect, searchBox, infoList, setInfoList, todosPerPage, setTodosPerPage, pageNum, setPageNum}) {
     const [currentPage, setCurrentPage] = useState(1);
-    const [todosPerPage, setTodosPerPage] = useState(10);
-    const [pageNum, setPageNum] = useState(0);
 
     var prev = currentPage - 1 <= 0 ? 1 : currentPage-1;
     var next = currentPage + 1 > pageNum ? currentPage : currentPage+1;
@@ -211,7 +207,6 @@ function Content({companySelect, statusSelect, searchBox}) {
 
     return (
     	<div className="Content">
-            <button className='button-submit' onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
             <TitleBox/>
             <RenderItems info={infoList}/>
             <div className="Rectangle-3019">
@@ -224,11 +219,6 @@ function Content({companySelect, statusSelect, searchBox}) {
                         
                         <span className="span6">共 {pageNum} 頁</span>
                     </div>
-                    {/* <div className="Group-69455">
-                        <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage)}>上一頁</button>
-                        <span className='span7'>{currentPage}</span>
-                        <button className='btn-right' onClick={()=>nextPage(setCurrentPage, setPageNum, next, setInfoList, todosPerPage)}>下一頁</button>
-                    </div> */}
                 </div>
                 <div className="Group-69455">
                     <button className='btn-left' onClick={()=>prevPage(setCurrentPage, setPageNum, prev, setInfoList, todosPerPage,  companySelect, statusSelect, searchBox)}>上一頁</button>
