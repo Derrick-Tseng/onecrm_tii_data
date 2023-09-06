@@ -4,7 +4,6 @@ import React, {useState, useEffect} from "react";
 import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox, exportDataToCsv } from "../api/agent.js";
 
 
-
 function setModal(productNum, setModalContentId, setModalContent){
     setModalContentId(productNum);
     apiGetInfoById(productNum)
@@ -107,8 +106,6 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect, stat
 }
 
 async function exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSelect="all", searchbox="") {
-
-
     if(companySelect === null){
         companySelect = "all";
     }
@@ -122,7 +119,6 @@ async function exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSel
 
         .then(res=>{
             GetCsv(res.data.data)
-            console.log(res)
         })
         .catch(err=>{
             console.log(err)
@@ -133,13 +129,14 @@ async function exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSel
         await apiGetInfoList(100000, 1, companySelect, statusSelect)
         .then(res=>{ 
             GetCsv(res.data.data)
-            console.log(res)
         })
         .catch(err=>{
             console.log(err)
         })
     }    
 }
+
+
 function GetCsv(DataList) {
     // 将 DataList 直接传递给 convertDataToCSV 函数
     const dataAsCSV = convertDataToCSV(DataList);
@@ -159,7 +156,6 @@ function GetCsv(DataList) {
 }
 
 function convertDataToCSV(data) {
-    console.log(typeof data)
     // 检查 data 是否为有效数组
     if (!Array.isArray(data) || data.length === 0) {
         console.error("Data is empty or not an array.");
@@ -179,9 +175,6 @@ function convertDataToCSV(data) {
     }
     return csvRows.join('\n');
 }
-
-
-
 
 
 function RenderItems({info}){
@@ -239,6 +232,7 @@ function FooterPageSelect({dataList, setCurrentPage, setInfoList, limit, setPage
     );
 }
 
+
 function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageNum, todosPerPage, setCurrentPage, companySelect, statusSelect, searchBox}){
 	const listItem = dataList.map(item => 
 		<option key={item} value={item}>{item}</option>
@@ -258,10 +252,12 @@ function FooterPageLimitSelect({dataList, setTodosPerPage, setInfoList, setPageN
     );
 }
 
+
 function prevPage(setCurrentPage, setPageNum, prev, setInfoList, limit, companySelect, statusSelect, searchBox){
     setCurrentPage(prev);
     getList(setInfoList, limit, prev, setPageNum, companySelect, statusSelect, searchBox);
 }
+
 
 function nextPage(setCurrentPage, setPageNum, next, setInfoList, limit, companySelect, statusSelect, searchBox){
     setCurrentPage(next);
@@ -283,8 +279,6 @@ function Content({companySelect, statusSelect, searchBox, infoList, setInfoList,
     }
 
     useEffect(() => {
-        console.log(companySelect)
-        console.log(statusSelect)
         getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
      }, []);
 
@@ -295,7 +289,6 @@ function Content({companySelect, statusSelect, searchBox, infoList, setInfoList,
     useEffect(() => {
         getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
     }, [statusSelect])
-     
 
     return (
         
