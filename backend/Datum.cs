@@ -15,6 +15,6 @@ namespace backend
         public byte[][]? Productcontent { get; set; }
         public byte[][]? Treaty { get; set; }
         public byte[][]? Rate { get; set; }
-        public string? Status { get; set; }
+        public Boolean? Status { get; set; }
     }
 }

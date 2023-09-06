@@ -24,8 +24,8 @@ namespace backend.Models
             if (optionsBuilder.IsConfigured)
             {
                 var builder = WebApplication.CreateBuilder();
-                // optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=root;Password=postgres;");
-                optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
+                optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=root;Password=postgres;");
+                // optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
             }
         }
 
@@ -71,7 +71,7 @@ namespace backend.Models
                     .HasColumnName("startdate");
 
                 entity.Property(e => e.Status)
-                    .HasMaxLength(10)
+                    // .HasMaxLength(10)
                     .HasColumnName("status");
 
                 entity.Property(e => e.Treaty).HasColumnName("treaty");

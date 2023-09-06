@@ -10,8 +10,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "停售"
-
+        "status": false
     },
     {
         "productnum": "201131M11A07302",
@@ -24,8 +23,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "停售"
-
+        "status": false
     },
     {
         "productnum": "202311R11AG7X00",
@@ -38,8 +36,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "停售"
-
+        "status": false
     },
     {
         "productnum": "203391R11A00101",
@@ -52,8 +49,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "停售"
-
+        "status": false
     },
     {
         "productnum": "203141M11A00903",
@@ -66,8 +62,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "停售"
-
+        "status": false
     },
     {
         "productnum": "204131M12BOZ000",
@@ -80,8 +75,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "在售"
-
+        "status": true
     },
     {
         "productnum": "204341R11AW9001",
@@ -94,8 +88,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "在售"
-
+        "status": true
     },
     {
         "productnum": "204421M21ARL000",
@@ -108,8 +101,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "在售"
-
+        "status": true
     },
     {
         "productnum": "205191E31A55801",
@@ -122,8 +114,7 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "在售"
-
+        "status": true
     },
     {
         "productnum": "205141M11A02701",
@@ -136,7 +127,6 @@
         "productcontent": "201291M11A062-F.pdf",
         "treaty": "201291M11A062-A.pdf",
         "rate": "201291M11A062-C.pdf",
-        "status": "在售"
-
+        "status": true
     }
 ]

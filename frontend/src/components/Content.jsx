@@ -61,8 +61,7 @@ function setModal(productNum, setModalContentId, setModalContent){
 }
 
 async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
-    
-    if(companySelect === null){
+    if(companySelect === null || companySelect.length === 0){
         companySelect = "all";
     }
     if(statusSelect === null){
@@ -197,12 +196,18 @@ function Content({companySelect, statusSelect, searchBox, infoList, setInfoList,
     }
 
     useEffect(() => {
+        console.log(companySelect)
+        console.log(statusSelect)
         getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
      }, []);
 
     useEffect(() => {
         getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
     }, [companySelect])
+
+    useEffect(() => {
+        getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox);
+    }, [statusSelect])
      
 
     return (

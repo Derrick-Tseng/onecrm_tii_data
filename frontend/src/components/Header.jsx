@@ -4,7 +4,7 @@ import React from "react";
 
 async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
     
-    if(companySelect === null){
+    if(companySelect === null || companySelect.length === 0){
         companySelect = "all";
     }
     if(statusSelect === null){
@@ -68,19 +68,22 @@ function DropDownCompany({placeholder, companyList, setCompanySelect, companySel
   	);
 }
 
-function DropDownStatus({placeholder, statusList, setSatusSelect}){
-	const listItem = statusList.map(item => 
-		<option key={item} value={item}>{item}</option>
-  	);
+function DropDownStatus({placeholder, statusList, setStatusSelect}){
+	// const listItem = statusList.map(item => 
+	// 	<option key={item} value={item}>{item}</option>
+  	// );
 
 	const handleChange = (e) => {
-		setSatusSelect(e.target.value)
+		setStatusSelect(e.target.value)
     };
 
   	return (
     	<select className='header-select' onChange={handleChange}>
       		<option value="None" disabled>{placeholder}</option>
-      		{listItem}
+      		{/* {listItem} */}
+			<option key="all" value="all">全部</option>
+			<option key="selling" value="selling">現售</option>
+			<option key="stop" value="stop">停售</option>
     	</select>
   	);
 }
@@ -98,7 +101,15 @@ function GetFilterBtn({companyList, status, setCompanySelect, setStatusSelect}){
     };
 
 	if (status != null){
-		listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>{status}</button>)
+		if(status === "all"){
+			listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>全部</button>)
+		}
+		else if(status === "selling"){
+			listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>在售</button>)
+		}
+		else{
+			listItem.push( <button className="btn-filter-status" value={status} key={status} onClick={handleClickStatus}>停售</button>)
+		}
 	}
 
 	if(companyList.length > 1 && companyList.includes("all")){
@@ -125,7 +136,7 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
 		'all',
 		'臺銀人壽保險股份有限公司', 
 		'保誠人壽保險股份有限公司', 
-		'國泰人壽保險股份有限公司', 
+		'國泰人壽保險股份有限公司',
 		'中國人壽保險股份有限公司',
 		'南山人壽保險股份有限公司',
 		'國華人壽保險股份有限公司',
@@ -155,11 +166,11 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
 
 	];
 
-	const statusList = [
-		'all',
-		'在售',
-		'停售'
-	]
+	// const statusList = [
+	// 	'all',
+	// 	'在售',
+	// 	'停售'
+	// ]
 
 	const handleSearchBoxChange = (e) => {
 		SetSearchBox(e.target.value)
@@ -172,7 +183,7 @@ function Header({companySelect, setCompanySelect, statusSelect, setStatusSelect,
 				<img src="https://onecrm.tw/images/logo-v2-004.png" className="Group-69526"/>
         		<span className="h-span1">搜尋</span>
         		<DropDownCompany placeholder="壽險公司" companyList={companyList} setCompanySelect={setCompanySelect} companySelect={companySelect} />
-        		<DropDownStatus placeholder="販售狀態" statusList={statusList} setSatusSelect={setStatusSelect}/>
+        		<DropDownStatus placeholder="販售狀態" setStatusSelect={setStatusSelect}/>
 				<input placeholder="輸入商品代碼或名稱" name="search-input" className='header-input' onChange={handleSearchBoxChange}></input>
 				<button className='button-submit' onClick={()=>getList(setInfoList, todosPerPage, 1, setPageNum, companySelect, statusSelect, searchBox)}>查詢</button>
 			</div>
