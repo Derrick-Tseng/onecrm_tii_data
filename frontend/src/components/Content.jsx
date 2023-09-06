@@ -1,7 +1,8 @@
 import '../css/Content.css';
 import Popup from './Popup';
 import React, {useState, useEffect} from "react";
-import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox } from "../api/agent.js";
+import { apiGetInfoById, apiGetInfoList, apiGetInfoListSearchbox, exportDataToCsv } from "../api/agent.js";
+
 
 
 function setModal(productNum, setModalContentId, setModalContent){
@@ -67,6 +68,7 @@ function setModal(productNum, setModalContentId, setModalContent){
     })
 }
 
+
 async function getList(setInfoList, limit, page, setPageNum, companySelect, statusSelect="all", searchbox=""){
     if(companySelect === null || companySelect.length === 0){
         companySelect = "all";
@@ -79,6 +81,7 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect, stat
     if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
         await apiGetInfoListSearchbox(limit, page, searchbox)
         .then(res=>{
+            
             setInfoList(res.data.data);
             setPageNum(res.data.pages);
             return 
@@ -102,6 +105,83 @@ async function getList(setInfoList, limit, page, setPageNum, companySelect, stat
         })
     }
 }
+
+async function exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSelect="all", searchbox="") {
+
+
+    if(companySelect === null){
+        companySelect = "all";
+    }
+    if(statusSelect === null){
+        statusSelect = "all";
+    }
+    var DataList = []
+
+    if(searchbox !== null && searchbox.length !== 0 && searchbox.indexOf(" ") === -1){
+        await apiGetInfoListSearchbox(100000, 1, searchbox)
+
+        .then(res=>{
+            GetCsv(res.data.data)
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+    else{
+        // const tmpSelect = companySelect
+        await apiGetInfoList(100000, 1, companySelect, statusSelect)
+        .then(res=>{ 
+            GetCsv(res.data.data)
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }    
+}
+function GetCsv(DataList) {
+    // 将 DataList 直接传递给 convertDataToCSV 函数
+    const dataAsCSV = convertDataToCSV(DataList);
+
+    // 创建Blob对象
+    const blob = new Blob(["\ufeff" +dataAsCSV], { type: 'text/csv; charset=UTF-8' });
+    // 创建下载链接
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'query_results.csv';
+
+    a.click();
+
+    // 释放URL对象
+    window.URL.revokeObjectURL(url);
+}
+
+function convertDataToCSV(data) {
+    console.log(typeof data)
+    // 检查 data 是否为有效数组
+    if (!Array.isArray(data) || data.length === 0) {
+        console.error("Data is empty or not an array.");
+        return "";
+    }
+
+    // 根据数据格式转换为CSV格式字符串，这里只是一个示例
+    // 您需要根据实际数据结构来实现此部分
+    // 假设data是一个包含对象的数组
+    // 此示例假设每个对象都有name和age属性
+    const csvRows = [];
+    const headers = Object.keys(data[0]);
+    csvRows.push(headers.join(',')); // 添加CSV标题行
+    for (const row of data) {
+        const values = headers.map(header => row[header]);
+        csvRows.push(values.join(','));
+    }
+    return csvRows.join('\n');
+}
+
+
+
 
 
 function RenderItems({info}){
@@ -218,7 +298,10 @@ function Content({companySelect, statusSelect, searchBox, infoList, setInfoList,
      
 
     return (
+        
     	<div className="Content">
+            <button className='button-submit' onClick={() => exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSelect, searchBox)}>export</button>
+
             <TitleBox/>
             <RenderItems info={infoList}/>
             <div className="Rectangle-3019">

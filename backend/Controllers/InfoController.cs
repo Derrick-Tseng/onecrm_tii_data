@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using backend.Models;
 using System;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace backend.Controllers
 {
@@ -24,6 +24,7 @@ namespace backend.Controllers
     [Route("api/[controller]")]
     public class InfoController : ControllerBase
     {
+    
         private readonly postgresContext _DBContext;
         public InfoController(postgresContext dbcontext)
         {
@@ -45,6 +46,9 @@ namespace backend.Controllers
             return Ok(info);
         }
 
+
+        
+        
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
         {
@@ -62,6 +66,10 @@ namespace backend.Controllers
             );
             return Ok(info);
         }
+
+
+      
+
 
         [HttpGet("GetList")]
         public IActionResult Search(string limit, string page, [FromQuery] SearchObj request)
@@ -95,13 +103,31 @@ namespace backend.Controllers
                     || (o.Approvalnum!=null && o.Approvalnum.Contains(request.SearchBox))
                 ).Count();
                 double k  = Math.Ceiling((double)n/lim);
-
+                
                 var retInfo = new {
                     pages = k,
                     data = info
                 };
-                return Ok(retInfo);
+                
+
+
+
+               
+                                
+                  
+                
+
+
+  
+                       
+                    return Ok(retInfo);
+                
+                
+
+                
+                
             }
+            
             else if(request.Company != "all" && request.Company != null && request.Company.Length != 0 && request.Status != "all" && request.Status != null && request.Status.Length != 0){
                 // filtered by company and status
                 bool reqStatus = false;
@@ -135,7 +161,9 @@ namespace backend.Controllers
                     pages = k,
                     data = info
                 };
-                return Ok(retInfo);
+              
+                       
+                    return Ok(retInfo);
             }
             else if (request.Company == "all" && request.Status != "all"  && request.Status != null && request.Status.Length != 0){
                 // filtered only by status
@@ -170,7 +198,10 @@ namespace backend.Controllers
                     pages = k,
                     data = info
                 };
-                return Ok(retInfo);
+                
+                       
+                    return Ok(retInfo);
+                
             }
             else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
                 // filtered by company
@@ -199,7 +230,10 @@ namespace backend.Controllers
                     pages = k,
                     data = info
                 };
-                return Ok(retInfo);
+                
+                       
+                    return Ok(retInfo);
+                
             }
             else{
                 var info = this._DBContext.Data.Select( x => new {
@@ -220,7 +254,9 @@ namespace backend.Controllers
                     pages = k,
                     data = info
                 };
-                return Ok(retInfo);
+                 
+                    return Ok(retInfo);
+                
             }
         }  
 
@@ -246,11 +282,13 @@ namespace backend.Controllers
             return CreatedAtAction("GetAll", info.Productnum, info);
         }
     }
-
+    
     public class SearchObj
     {
         public string ?Company { get; set; }
         public string ?Status { get; set; }
         public string ?SearchBox { get; set; }
     }
+    
+    
 } 

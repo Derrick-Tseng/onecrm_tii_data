@@ -11,6 +11,9 @@ const pdfRequest = axios.create({
 
 // info 相關的 api
 export const apiGetAll = () => infoRequest.get('/GetAll');
+
+export const apiExport = () => infoRequest.get('/Export');
+
 export const apiGetInfoList = (limit, page, company, status) => 
   infoRequest.get('/GetList?limit=' + limit + '&page=' + page + "&Company=" + company + "&Status=" + status);
 
