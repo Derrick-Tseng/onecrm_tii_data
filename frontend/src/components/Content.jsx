@@ -9,6 +9,13 @@ function setModal(productNum, setModalContentId, setModalContent){
     apiGetInfoById(productNum)
     .then(res =>{
         const item = res.data[0];
+        var status = "停售"
+        if(item.status === false){
+          status = "停售"
+        }
+        else{
+          status = "現售"
+        }
         setModalContent(
             <>
                <table className="styled-table">
@@ -23,7 +30,7 @@ function setModal(productNum, setModalContentId, setModalContent){
               </tr>
               <tr>
                 <td>產品狀態：</td>
-                <td>{item.status}</td>
+                <td>{status}</td>
               </tr>
               <tr>
                 <td>發行公司：</td>
