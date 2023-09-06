@@ -300,7 +300,7 @@ function Content({companySelect, statusSelect, searchBox, infoList, setInfoList,
     return (
         
     	<div className="Content">
-            <button className='button-submit' onClick={() => exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSelect, searchBox)}>export</button>
+            <button className='button-export' onClick={() => exportDataAsCSV(setInfoList, setPageNum, companySelect, statusSelect, searchBox)}>匯出CSV</button>
 
             <TitleBox/>
             <RenderItems info={infoList}/>

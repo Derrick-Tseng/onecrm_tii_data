@@ -106,7 +106,7 @@ table {
   .Rectangle-2870 {
     width: 90%;
     height: 58px;
-    margin: 5% 5% 0 5%;
+    margin: 2% 5% 0 5%;
     border-radius: 10px;
     background-color: #efefef;
     display: flex;
@@ -385,5 +385,19 @@ table {
   .button-check:hover {
     background-color: #0056b3;
   }
+
+  .button-export  {
+    background-color: #07304E;
+    margin: 0 0 0 80%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+
+
 
   
