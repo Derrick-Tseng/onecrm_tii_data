@@ -45,10 +45,8 @@ namespace backend.Controllers
             }).ToList();
             return Ok(info);
         }
-
-
         
-        
+
         [HttpGet("GetInfo/{productNum}")] 
         public IActionResult GetInfo(string productNum)
         {
@@ -66,10 +64,7 @@ namespace backend.Controllers
             );
             return Ok(info);
         }
-
-
-      
-
+        
 
         [HttpGet("GetList")]
         public IActionResult Search(string limit, string page, [FromQuery] SearchObj request)
@@ -78,6 +73,7 @@ namespace backend.Controllers
             var pg = int.Parse(page);
             
             if (request.SearchBox != null && request.SearchBox.Length != 0){
+                Console.WriteLine("11111");
                 //search bar
                 var info = this._DBContext.Data.Where(o => 
                     o.Productnum.Contains(request.SearchBox) 
@@ -107,29 +103,13 @@ namespace backend.Controllers
                 var retInfo = new {
                     pages = k,
                     data = info
-                };
-                
-
-
-
-               
-                                
-                  
-                
-
-
-  
-                       
-                    return Ok(retInfo);
-                
-                
-
-                
-                
+                }; 
+                return Ok(retInfo);
             }
             
             else if(request.Company != "all" && request.Company != null && request.Company.Length != 0 && request.Status != "all" && request.Status != null && request.Status.Length != 0){
                 // filtered by company and status
+                Console.WriteLine("22222");
                 bool reqStatus = false;
                 if (request.Status == "selling"){
                     reqStatus = true;
@@ -160,13 +140,12 @@ namespace backend.Controllers
                 var retInfo = new {
                     pages = k,
                     data = info
-                };
-              
-                       
+                };   
                     return Ok(retInfo);
             }
             else if (request.Company == "all" && request.Status != "all"  && request.Status != null && request.Status.Length != 0){
                 // filtered only by status
+                Console.WriteLine("33333");
                 bool reqStatus = false;
                 if (request.Status == "selling"){
                     reqStatus = true;
@@ -197,17 +176,16 @@ namespace backend.Controllers
                 var retInfo = new {
                     pages = k,
                     data = info
-                };
-                
-                       
-                    return Ok(retInfo);
+                };   
+                return Ok(retInfo);
                 
             }
             else if(request.Company != "all"  && request.Company != null && request.Company.Length != 0  && request.Status == "all"){
                 // filtered by company
+                Console.WriteLine("44444");
+                Console.WriteLine("+++++" + request.Company);
                 var info = this._DBContext.Data.Where(o => 
-                    o.Company == request.Company
-                    // o.Company == request.Company
+                    request.Company.Contains(o.Company)
                 ).Select( x =>
                     new {
                         productNum = x.Productnum,
@@ -218,24 +196,24 @@ namespace backend.Controllers
                         endDate = x.Enddate,
                         status = x.Status
                     }
-                ).ToList().Skip((pg-1) * lim).Take(lim);;
+                ).ToList().Skip((pg-1) * lim).Take(lim);
+                Console.WriteLine("+++++", info);
                 var amount = info.Count();
                 // count how many pages
                 var n =this._DBContext.Data.Where(o => 
-                    o.Company == request.Company
+                    request.Company.Contains(o.Company)
                 ).Count();
                 double k  = Math.Ceiling((double)n/lim);
 
                 var retInfo = new {
                     pages = k,
                     data = info
-                };
-                
-                       
-                    return Ok(retInfo);
+                };  
+                return Ok(retInfo);
                 
             }
             else{
+                Console.WriteLine("55555");
                 var info = this._DBContext.Data.Select( x => new {
                     productNum = x.Productnum,
                     productName = x.Productname,
@@ -254,11 +232,10 @@ namespace backend.Controllers
                     pages = k,
                     data = info
                 };
-                 
-                    return Ok(retInfo);
-                
+                return Ok(retInfo);
             }
         }  
+
 
         [HttpDelete("Remove/{productNum}")]
         public IActionResult Remove(string productNum)
@@ -272,6 +249,7 @@ namespace backend.Controllers
             }
             return Ok(false);
         }
+
 
         [HttpPost("Create")]
         public IActionResult Create([FromBody] Datum info)
