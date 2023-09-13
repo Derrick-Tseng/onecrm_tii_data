@@ -24,7 +24,7 @@ namespace backend.Models
             if (optionsBuilder.IsConfigured)
             {
                 var builder = WebApplication.CreateBuilder();
-                optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=postgres;User Id=root;Password=postgres;");
+                optionsBuilder.UseNpgsql("Server=10.1.249.182;Port=5432;Database=tii_products;User Id=postgres;Password=1234;");
                 // optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
             }
         }
